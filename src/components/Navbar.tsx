@@ -39,11 +39,17 @@ export default function Navbar() {
                     <Link href="/contact" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
                         Contact Us
                     </Link>
-                    <div className="group relative flex items-center gap-1 cursor-pointer">
+                    <div className="group relative flex items-center gap-2 cursor-pointer">
                         <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors">
                             More
                         </span>
                         <ChevronDown size={14} className="text-white/30 group-hover:text-white transition-colors" />
+
+                        {/* More Dropdown */}
+                        <div className="absolute top-full left-0 mt-2 w-48 bg-[#050505] border border-white/10 rounded-xl py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 backdrop-blur-xl shadow-2xl">
+                            <Link href="/projects" className="block px-6 py-2 text-sm text-white/60 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Projects</Link>
+                            <Link href="/blog" className="block px-6 py-2 text-sm text-white/60 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Blogs</Link>
+                        </div>
                     </div>
                 </div>
             </div>
