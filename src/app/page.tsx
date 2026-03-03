@@ -2,6 +2,13 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import HorizontalScroll from "@/components/HorizontalScroll";
 import ParallaxImage from "@/components/ParallaxImage";
+import Marquee from "@/components/Marquee";
+import OurStory from "@/components/OurStory";
+import WorkingProcess from "@/components/WorkingProcess";
+import LatestProjects from "@/components/LatestProjects";
+import ServicesOverview from "@/components/ServicesOverview";
+import CompanyInsights from "@/components/CompanyInsights";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -10,20 +17,24 @@ export default function Home() {
       <HeroSection />
 
       {/* Ticker / Marquee Section */}
-      <section className="py-20 border-b border-white/10 overflow-hidden relative overflow-x-hidden w-full flex">
-        <div className="flex w-fit whitespace-nowrap animate-spin-slow">
-          <span className="text-xl font-bold tracking-widest px-8">LOGOIPSUM</span>
-          <span className="text-xl font-bold tracking-widest px-8">LOGOIPSUM</span>
-          <span className="text-xl font-bold tracking-widest px-8">LOGOIPSUM</span>
-          <span className="text-xl font-bold tracking-widest px-8">LOGOIPSUM</span>
-          <span className="text-xl font-bold tracking-widest px-8">LOGOIPSUM</span>
-        </div>
-      </section>
+      <Marquee />
 
-      {/* Services Horizontal Scroll */}
+      {/* Services Horizontal Scroll (Existing) */}
       <HorizontalScroll />
 
-      {/* Parallax Image Section */}
+      {/* Our Story Section */}
+      <OurStory />
+
+      {/* Working Process Section */}
+      <WorkingProcess />
+
+      {/* Latest Projects Section */}
+      <LatestProjects />
+
+      {/* Services Overview Section */}
+      <ServicesOverview />
+
+      {/* Parallax Image Section (Existing) */}
       <section className="h-screen w-full p-6 md:p-20 bg-[#050505] flex items-center justify-center">
         <div className="w-full max-w-6xl h-[80vh] rounded-3xl overflow-hidden relative">
           <ParallaxImage
@@ -39,11 +50,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer / Contact Spacer */}
+      {/* Company Insights Section */}
+      <CompanyInsights />
+
+      {/* Final Call to Action / Footer Area */}
       <section className="min-h-[50vh] flex flex-col items-center justify-center p-20 bg-[#a8e03e] text-black">
         <h2 className="text-6xl md:text-9xl font-bold uppercase tracking-tighter text-center">Let's Build.</h2>
         <p className="mt-6 text-xl font-medium">Ready to transform education?</p>
       </section>
+
+      <Footer />
     </main>
   );
 }
