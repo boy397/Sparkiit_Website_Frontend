@@ -10,7 +10,8 @@ import {
     Hash, HelpCircle, ChevronDown, ChevronRight, Settings2,
     Briefcase,
     Workflow,
-    PanelBottom
+    PanelBottom,
+    LogOut
 } from "lucide-react";
 
 // Nav Data Structure
@@ -19,6 +20,7 @@ type NavItem = {
     href?: string;
     icon: React.ReactNode;
     role?: string;
+    onClick?: () => void;
     subItems?: { label: string; href: string; icon: React.ReactNode }[];
 };
 
@@ -89,6 +91,7 @@ const navGroups: NavGroup[] = [
         title: "SETTINGS",
         items: [
             { label: "Settings", href: "/admin/settings", icon: <Settings size={20} strokeWidth={1.8} /> },
+            { label: "Logout", href: "#", icon: <LogOut size={20} strokeWidth={1.8} />, onClick: () => {} }, // Placeholder, will be replaced by actual logout handler
         ]
     }
 ];
@@ -173,7 +176,7 @@ function NavItemComponent({ item, sidebarOpen, pathname, userRole, onClick }: { 
     return (
         <Link
             href={item.href}
-            onClick={onClick}
+            onClick={item.onClick || onClick}
             style={{
                 display: "flex",
                 alignItems: "center",
@@ -201,6 +204,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     const router = useRouter();
     const [user, setUser] = useState<any>(null);
     const [isMounted, setIsMounted] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -216,24 +220,81 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     useEffect(() => {
         setIsMounted(true);
-        const userData = localStorage.getItem("adminUser");
-        const token = localStorage.getItem("adminToken");
-        if (userData && token) {
-            setUser(JSON.parse(userData));
-        }
-    }, []);
-
-    useEffect(() => {
-        if (!isMounted) return;
-        if (pathname === "/admin/login") return;
-        if (!user) {
-            router.push("/admin/login");
-        }
-    }, [pathname, router, user, isMounted]);
+        const checkSession = async () => {
+            setIsLoading(true);
+            try {
+                const res = await fetch("http://localhost:5000/api/admin/me", {
+                    credentials: "include"
+                });
+                const data = await res.json();
+                if (data.success) {
+                    setUser(data.data);
+                } else {
+                    setUser(null);
+                    if (pathname !== "/admin/login") {
+                        router.push("/admin/login");
+                    }
+                }
+            } catch (err) {
+                console.error("Session check failed", err);
+                setUser(null);
+                if (pathname !== "/admin/login") {
+                    router.push("/admin/login");
+                }
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        checkSession();
+    }, [pathname, router]);
 
     if (!isMounted) return null;
+    
     if (pathname === "/admin/login") return <>{children}</>;
+
+    if (isLoading) {
+        return (
+            <div style={{ 
+                height: "100vh", 
+                width: "100%", 
+                background: "#0a0a0a", 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center",
+                color: "#a8e03e",
+                fontFamily: "Inter, sans-serif"
+            }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 20 }}>
+                    <div style={{ 
+                        width: 40, 
+                        height: 40, 
+                        border: "3px solid rgba(168, 224, 62, 0.1)", 
+                        borderTopColor: "#a8e03e", 
+                        borderRadius: "50%", 
+                        animation: "spin 1s linear infinite" 
+                    }} />
+                    <span style={{ fontSize: 14, fontWeight: 500, letterSpacing: "0.05em" }}>VERIFYING SESSION...</span>
+                </div>
+                <style>{`
+                    @keyframes spin { to { transform: rotate(360deg); } }
+                `}</style>
+            </div>
+        );
+    }
+
     if (!user) return null;
+
+    const handleLogout = async () => {
+        try {
+            await fetch("http://localhost:5000/api/admin/logout", {
+                credentials: "include"
+            });
+            setUser(null);
+            router.push("/admin/login");
+        } catch (err) {
+            console.error("Logout failed", err);
+        }
+    };
 
     // Helper to find current page name for header
     let currentPageName = "Dashboard";
@@ -251,12 +312,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         }
     }
 
+    // Update logout item in navGroups
+    navGroups[6].items[1].onClick = handleLogout;
 
     return (
         <div style={{ display: "flex", minHeight: "100vh", background: "#0a0a0a", color: "#e5e5e5", fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif" }}>
             {/* Sidebar Overlay for Mobile */}
             {isMobile && sidebarOpen && (
-                <div 
+                <div
                     onClick={() => setSidebarOpen(false)}
                     style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 45, backdropFilter: "blur(4px)" }}
                 />
@@ -331,12 +394,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                     </div>
                                 )}
                                 {visibleItems.map((item, itemIdx) => (
-                                    <NavItemComponent 
-                                        key={itemIdx} 
-                                        item={item} 
-                                        sidebarOpen={sidebarOpen} 
-                                        pathname={pathname} 
-                                        userRole={user?.role as string} 
+                                    <NavItemComponent
+                                        key={itemIdx}
+                                        item={item}
+                                        sidebarOpen={sidebarOpen}
+                                        pathname={pathname}
+                                        userRole={user?.role as string}
                                         onClick={() => isMobile && setSidebarOpen(false)}
                                     />
                                 ))}
@@ -408,8 +471,38 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         )}
                         <h1 style={{ fontSize: isMobile ? 16 : 18, fontWeight: 600, color: "#fff", letterSpacing: "-0.01em" }}>{currentPageName}</h1>
                     </div>
-                    
+
                     <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                        <button
+                            onClick={handleLogout}
+                            title="Log Out"
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 8,
+                                background: "none",
+                                border: "none",
+                                color: "rgba(255,255,255,0.5)",
+                                cursor: "pointer",
+                                fontSize: 13,
+                                fontWeight: 500,
+                                padding: "6px 12px",
+                                borderRadius: 8,
+                                transition: "all 0.2s"
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.color = "#ff4d4d";
+                                e.currentTarget.style.background = "rgba(255, 77, 77, 0.05)";
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.color = "rgba(255,255,255,0.5)";
+                                e.currentTarget.style.background = "none";
+                            }}
+                        >
+                            <LogOut size={18} />
+                            {!isMobile && <span>Log Out</span>}
+                        </button>
+
                         <div
                             style={{
                                 width: 34,
@@ -424,7 +517,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 color: "#050505",
                             }}
                         >
-                            A
+                            {user?.username?.charAt(0).toUpperCase() || 'A'}
                         </div>
                     </div>
                 </header>

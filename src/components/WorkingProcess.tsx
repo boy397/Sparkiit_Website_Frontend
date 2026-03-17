@@ -25,13 +25,13 @@ export default function WorkingProcess() {
     const { data } = useHomepageData();
 
     const process = data?.content?.process || {
-        title: "WORKING PROCESS.",
+        title: "SPARKIIT CATCHPHRASE",
         description: "A systematic approach to turning complex ideas into seamless digital experiences.",
-        step1Title: "STRATEGY",
+        step1Title: "IDEA",
         step1Desc: "We define the vision, goals, and core requirements to ensure a solid foundation for your project.",
-        step2Title: "DESIGN",
+        step2Title: "INNOVATION",
         step2Desc: "Our creative team builds intuitive and visually stunning interfaces that prioritize user experience.",
-        step3Title: "DEVELOP",
+        step3Title: "TRANSFORMATION",
         step3Desc: "Scaleable, secure, and high-performance solutions built with modern technology stacks.",
     };
 
@@ -42,14 +42,29 @@ export default function WorkingProcess() {
     ];
 
     return (
-        <section className="py-24 px-6 md:px-20 bg-[#050505]">
+        <section className="py-24 px-6 md:px-20 bg-[#050505] ">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-                    <h2 className="text-5xl md:text-7xl font-bold text-white uppercase tracking-tighter">
+                    
+                    <h2 className="text-5xl md:text-7xl font-bold text-white uppercase tracking-tighter cursor-default">
+                        {/* Split by break first, then by word */}
                         {(process.title || "").split(' <br /> ').map((line: string, i: number) => (
-                            <span key={i}>{line}{i < (process.title || "").split(' <br /> ').length - 1 && <br />}</span>
+                            <span key={i} className="block">
+                                {line.split(' ').map((word: string, j: number) => (
+                                    <motion.span
+                                        key={j}
+                                        whileHover={{ scale: 1.05, color: "#a8e03e" }}
+                                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                        // inline-block is required for scale transforms to work on text
+                                        className="inline-block mr-3 md:mr-4 last:mr-0 origin-left"
+                                    >
+                                        {word}
+                                    </motion.span>
+                                ))}
+                            </span>
                         ))}
                     </h2>
+
                     <p className="max-w-sm text-gray-500 font-medium">
                         {process.description}
                     </p>
@@ -59,13 +74,13 @@ export default function WorkingProcess() {
                     {steps.map((step, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 1, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: index * 0.1 }}
                             className="group relative"
                         >
-                            <span className="text-8xl font-black text-white/5 absolute -top-10 -left-6 group-hover:text-[#a8e03e]/10 transition-colors">
+                            <span className="text-8xl font-black absolute -top-10 -left-6 transition-all duration-700 select-none text-transparent group-hover:text-[#a8e03e]/10" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.15)" }}>
                                 {step.num}
                             </span>
                             <div className="relative z-10 pt-10">

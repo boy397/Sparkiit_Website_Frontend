@@ -20,13 +20,13 @@ export default function AdminLogin() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
+                credentials: "include",
             });
 
             const data = await res.json();
 
             if (data.success) {
-                localStorage.setItem("adminToken", data.data.token);
-                localStorage.setItem("adminUser", JSON.stringify(data.data));
+                // No more localStorage
                 router.push("/admin");
             } else {
                 setError(data.message || "Login failed");
