@@ -5,7 +5,7 @@ import { Search, ShoppingBasket, User, ChevronDown, LayoutGrid, Plus, LogOut, Us
 import { useState, useEffect, useCallback } from "react";
 import { useHomepageData } from "@/hooks/useHomepageData";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 
 export default function Navbar() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -15,6 +15,18 @@ export default function Navbar() {
     const { data } = useHomepageData();
     const router = useRouter();
     const site = data?.content?.site || { logoText: "Sparkiit" };
+
+    const { scrollY } = useScroll();
+    const [hidden, setHidden] = useState(false);
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious() ?? 0;
+        if (latest > previous && latest > 150) {
+            setHidden(true);
+        } else {
+            setHidden(false);
+        }
+    });
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -34,7 +46,15 @@ export default function Navbar() {
     }, [router]);
 
     return (
-        <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-6 md:px-20 py-4 backdrop-blur-md border-b border-white/5 bg-[#050505]/50">
+        <motion.nav 
+            variants={{
+                visible: { y: 0 },
+                hidden: { y: "-100%" },
+            }}
+            animate={hidden ? "hidden" : "visible"}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="fixed top-0 w-full z-50 flex items-center justify-between px-6 md:px-20 py-4 backdrop-blur-md border-b border-white/5 bg-[#050505]/50"
+        >
             {/* Left Side: Logo and Links */}
             <div className="flex items-center gap-10">
                 <div className="flex items-center gap-2">
@@ -76,6 +96,8 @@ export default function Navbar() {
                             <Link href="/projects" className="block px-6 py-2 text-sm text-white/60 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Projects</Link>
                             <Link href="/blog" className="block px-6 py-2 text-sm text-white/60 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Blogs</Link>
                             <Link href="/verify" className="block px-6 py-2 text-sm text-white/60 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Verify Certificate</Link>
+                            <div className="h-px bg-white/5 my-2" />
+                            <Link href="/admin/login" className="block px-6 py-2 text-sm text-[#a8e03e]/70 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Admin Login</Link>
                         </div>
                     </div>
                 </div>
@@ -262,6 +284,6 @@ export default function Navbar() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </nav>
+        </motion.nav>
     );
 }
