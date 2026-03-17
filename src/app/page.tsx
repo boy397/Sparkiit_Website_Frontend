@@ -8,6 +8,7 @@ import WorkingProcess from "@/components/WorkingProcess";
 import LatestProjects from "@/components/LatestProjects";
 import ServicesOverview from "@/components/ServicesOverview";
 import CompanyInsights from "@/components/CompanyInsights";
+import AmbassadorEngagement from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -52,6 +53,8 @@ export default function Home() {
 
       {/* Company Insights Section */}
       <CompanyInsights />
+
+      <AmbassadorEngagement />
 
       {/* Final Call to Action / Footer Area */}
       <section className="min-h-[50vh] flex flex-col items-center justify-center p-10 md:p-20 bg-[#a8e03e] text-black">

@@ -13,9 +13,17 @@ export interface Service {
     title: string;
 }
 
+export interface Recognition {
+    num: string;
+    title?: string;
+    category?: string;
+    image: string;
+}
+
 export interface HomepageData {
     projects: Project[];
     services: Service[];
+    recognitions?: Recognition[];
     content: {
         hero?: {
             word1?: string;
