@@ -23,6 +23,9 @@ export default function Home() {
       {/* Services Horizontal Scroll (Existing) */}
       <HorizontalScroll />
 
+      {/* Services Overview Section */}
+      <ServicesOverview />
+
       {/* Our Story Section */}
       <OurStory />
 
@@ -31,9 +34,6 @@ export default function Home() {
 
       {/* Latest Projects Section */}
       <LatestProjects />
-
-      {/* Services Overview Section */}
-      <ServicesOverview />
 
       {/* Parallax Image Section (Existing) */}
       <section className="h-screen w-full p-6 md:p-20 bg-[#050505] flex items-center justify-center">
