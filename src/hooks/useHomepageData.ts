@@ -65,6 +65,9 @@ export interface HomepageData {
             linkedin?: string;
             instagram?: string;
         };
+        review?: {
+            rating?: string;
+        };
     };
 }
 
