@@ -97,7 +97,7 @@ export default function Navbar() {
                             <Link href="/blog" className="block px-6 py-2 text-sm text-white/60 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Blogs</Link>
                             <Link href="/verify" className="block px-6 py-2 text-sm text-white/60 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Verify Certificate</Link>
                             <div className="h-px bg-white/5 my-2" />
-                            <Link href="/admin/login" className="block px-6 py-2 text-sm text-[#a8e03e]/70 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Admin Login</Link>
+                            <Link href="/events" className="block px-6 py-2 text-sm text-[#a8e03e] hover:text-[#bef251] transition-colors uppercase tracking-widest font-black">Events</Link>
                         </div>
                     </div>
                 </div>

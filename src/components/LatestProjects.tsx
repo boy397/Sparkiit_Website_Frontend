@@ -121,7 +121,7 @@ function RecognitionCard({ item, index }: { item: any; index: number }) {
             <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden rounded-2xl mb-6 bg-white/5 border border-white/10">
                 <Image
                     src={item.image}
-                    alt={item.title}
+                    alt={item.title || item.category || "Recognition Image"}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
