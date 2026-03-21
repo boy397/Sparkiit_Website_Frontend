@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { Loader2, Plus, Trash2, Edit2, Save, X, Image as ImageIcon } from "lucide-react";
 
-const API_BASE = "http://localhost:5000/api/admin";
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000") + "/api/admin";
+
 
 interface Project {
     _id: string;

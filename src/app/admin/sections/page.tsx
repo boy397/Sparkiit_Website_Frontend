@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Star, Save, RefreshCw, AlertCircle, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 
-const API_BASE = "http://localhost:5000/api/admin";
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000") + "/api/admin";
+
 
 export default function SectionsManager() {
     const [rating, setRating] = useState("5.0");

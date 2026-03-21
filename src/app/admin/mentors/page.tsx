@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Plus, Edit2, Trash2, X, Save, Image as ImageIcon, User } from "lucide-react";
 
-const API_BASE = "http://localhost:5000/api/admin";
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000") + "/api/admin";
+
 
 interface Mentor {
     _id: string;
