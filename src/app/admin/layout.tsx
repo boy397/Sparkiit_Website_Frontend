@@ -221,16 +221,34 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 if (apiBase.endsWith('/')) apiBase = apiBase.slice(0, -1);
                 
                 const fetchUrl = `${apiBase}/api/admin/me`;
-                console.log("Fetching session from:", fetchUrl);
+
+                // Get JWT token from localStorage (set during login)
+                const token = localStorage.getItem("adminToken");
+
+                // If no token stored, user hasn't logged in
+                if (!token) {
+                    setUser(null);
+                    if (pathname !== "/admin/login") {
+                        router.push("/admin/login");
+                    }
+                    setIsLoading(false);
+                    return;
+                }
 
                 const res = await fetch(fetchUrl, {
-                    credentials: "include"
+                    credentials: "include",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
                 });
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 const data = await res.json();
                 if (data.success) {
                     setUser(data.data);
                 } else {
+                    // Token invalid, clear it
+                    localStorage.removeItem("adminToken");
+                    localStorage.removeItem("adminUser");
                     setUser(null);
                     if (pathname !== "/admin/login") {
                         router.push("/admin/login");
@@ -238,6 +256,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 }
             } catch (err) {
                 console.error("Session check failed", err);
+                localStorage.removeItem("adminToken");
+                localStorage.removeItem("adminUser");
                 setUser(null);
                 if (pathname !== "/admin/login") {
                     router.push("/admin/login");
@@ -287,13 +307,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     const handleLogout = async () => {
         try {
+            const token = localStorage.getItem("adminToken");
             await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/logout`, {
-                credentials: "include"
+                credentials: "include",
+                headers: token ? { "Authorization": `Bearer ${token}` } : {}
             });
-            setUser(null);
-            router.push("/admin/login");
         } catch (err) {
             console.error("Logout failed", err);
+        } finally {
+            localStorage.removeItem("adminToken");
+            localStorage.removeItem("adminUser");
+            setUser(null);
+            router.push("/admin/login");
         }
     };
 
