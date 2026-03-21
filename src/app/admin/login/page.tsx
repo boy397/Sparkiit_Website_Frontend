@@ -32,8 +32,9 @@ export default function AdminLogin() {
             } else {
                 setError(data.message || "Login failed");
             }
-        } catch {
-            setError("Something went wrong. Please try again.");
+        } catch (err: any) {
+            console.error("Login Fetch Error:", err);
+            setError(`Connection Error: ${err.message || "Please check your network"}`);
         } finally {
             setLoading(false);
         }

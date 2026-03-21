@@ -216,9 +216,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         const checkSession = async () => {
             setIsLoading(true);
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/me`, {
+                let apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+                // Remove trailing slash if exists
+                if (apiBase.endsWith('/')) apiBase = apiBase.slice(0, -1);
+                
+                const fetchUrl = `${apiBase}/api/admin/me`;
+                console.log("Fetching session from:", fetchUrl);
+
+                const res = await fetch(fetchUrl, {
                     credentials: "include"
                 });
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 const data = await res.json();
                 if (data.success) {
                     setUser(data.data);

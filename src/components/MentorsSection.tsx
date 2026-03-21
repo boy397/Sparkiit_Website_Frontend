@@ -107,7 +107,6 @@ export default function MentorsSection() {
     useEffect(() => {
         setMounted(true);
         fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/public/mentors`)
-
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
