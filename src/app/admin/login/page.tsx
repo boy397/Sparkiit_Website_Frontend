@@ -71,13 +71,13 @@ export default function AdminLogin() {
                         width: 48,
                         height: 48,
                         borderRadius: 12,
-                        background: "linear-gradient(135deg, #a8e03e 0%, #7cb518 100%)",
+                        background: "linear-gradient(135deg, #00875a 0%, #006644 100%)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         fontWeight: 800,
                         fontSize: 20,
-                        color: "#050505",
+                        color: "#ffffff",
                         margin: "0 auto 16px"
                     }}>
                         S
@@ -139,10 +139,10 @@ export default function AdminLogin() {
                         style={{
                             width: "100%",
                             padding: "14px",
-                            background: "#a8e03e",
+                            background: "#00875a",
                             border: "none",
                             borderRadius: 12,
-                            color: "#050505",
+                            color: "#ffffff",
                             fontWeight: 700,
                             fontSize: 15,
                             cursor: loading ? "not-allowed" : "pointer",

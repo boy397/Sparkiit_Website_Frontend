@@ -88,7 +88,7 @@ export default function ServiceManagement() {
     if (loading) {
         return (
             <div className="flex items-center justify-center min-h-[400px]">
-                <Loader2 className="animate-spin text-[#a8e03e]" size={32} />
+                <Loader2 className="animate-spin text-[#00875a]" size={32} />
             </div>
         );
     }
@@ -102,7 +102,7 @@ export default function ServiceManagement() {
                 </div>
                 <button 
                     onClick={() => setEditingService({ title: "", order: services.length + 1 })}
-                    className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#a8e03e] text-black font-bold hover:scale-[1.02] active:scale-[0.98] transition-all"
+                    className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#00875a] text-white font-bold hover:scale-[1.02] active:scale-[0.98] transition-all"
                 >
                     <Plus size={20} />
                     Add Service
@@ -113,7 +113,7 @@ export default function ServiceManagement() {
                 {services.map((service) => (
                     <div key={service._id} className="bg-white/5 border border-white/10 rounded-2xl p-6 flex items-center justify-between group hover:bg-white/8 transition-all">
                         <div className="flex items-center gap-6">
-                            <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-[#a8e03e] group-hover:bg-[#a8e03e]/10 transition-all">
+                            <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-[#00875a] group-hover:bg-[#00875a]/10 transition-all">
                                 <Activity size={24} />
                             </div>
                             <div>
@@ -124,7 +124,7 @@ export default function ServiceManagement() {
                         <div className="flex items-center gap-4">
                             <button 
                                 onClick={() => setEditingService(service)}
-                                className="p-3 bg-white/10 hover:bg-[#a8e03e] hover:text-black rounded-xl transition-all"
+                                className="p-3 bg-white/10 hover:bg-[#00875a] hover:text-white rounded-xl transition-all"
                             >
                                 <Edit2 size={18} />
                             </button>
@@ -154,7 +154,7 @@ export default function ServiceManagement() {
                                     type="text" 
                                     value={editingService.title}
                                     onChange={e => setEditingService({...editingService, title: e.target.value})}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#a8e03e]/40"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#00875a]/40"
                                     placeholder="UI/UX Strategy"
                                 />
                             </div>
@@ -164,7 +164,7 @@ export default function ServiceManagement() {
                                     type="number" 
                                     value={editingService.order}
                                     onChange={e => setEditingService({...editingService, order: parseInt(e.target.value)})}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#a8e03e]/40"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#00875a]/40"
                                 />
                             </div>
                         </div>
@@ -178,7 +178,7 @@ export default function ServiceManagement() {
                             <button 
                                 onClick={handleSave}
                                 disabled={saving}
-                                className="flex items-center gap-2 px-8 py-2 rounded-xl bg-[#a8e03e] text-black font-bold hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
+                                className="flex items-center gap-2 px-8 py-2 rounded-xl bg-[#00875a] text-white font-bold hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
                             >
                                 {saving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
                                 Save Service

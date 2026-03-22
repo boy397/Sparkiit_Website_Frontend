@@ -71,7 +71,7 @@ export default function SectionsManager() {
     if (loading) {
         return (
             <div className="flex items-center justify-center min-h-[400px]">
-                <RefreshCw className="animate-spin text-[#a8e03e]" size={32} />
+                <RefreshCw className="animate-spin text-[#00875a]" size={32} />
             </div>
         );
     }
@@ -82,7 +82,7 @@ export default function SectionsManager() {
         <div className="max-w-4xl mx-auto p-6">
             <header className="mb-10">
                 <h1 className="text-3xl font-black text-white uppercase tracking-tighter mb-2">
-                    Website <span className="text-[#a8e03e]">Sections</span>
+                    Website <span className="text-[#00875a]">Sections</span>
                 </h1>
                 <p className="text-white/40 text-sm uppercase tracking-widest font-medium">
                     Manage dynamic content across the homepage
@@ -98,8 +98,8 @@ export default function SectionsManager() {
 
                     <div className="relative z-10">
                         <div className="flex items-center gap-4 mb-6">
-                            <div className="w-12 h-12 bg-[#a8e03e]/10 rounded-xl flex items-center justify-center text-[#a8e03e]">
-                                <Star size={24} fill="#a8e03e" />
+                            <div className="w-12 h-12 bg-[#00875a]/10 rounded-xl flex items-center justify-center text-[#00875a]">
+                                <Star size={24} fill="#00875a" />
                             </div>
                             <div>
                                 <h2 className="text-xl font-bold text-white uppercase tracking-tight">Review Section</h2>
@@ -109,7 +109,7 @@ export default function SectionsManager() {
 
                         <div className="bg-black/20 rounded-2xl p-6 border border-white/5">
                             <label className="block text-white/60 text-xs font-bold uppercase tracking-widest mb-4">
-                                Platform Rating: <span className="text-[#a8e03e] text-lg ml-2 font-black">{numericRating.toFixed(1)}</span> / 5.0
+                                Platform Rating: <span className="text-[#00875a] text-lg ml-2 font-black">{numericRating.toFixed(1)}</span> / 5.0
                             </label>
                             
                             <input 
@@ -119,7 +119,7 @@ export default function SectionsManager() {
                                 step="0.1" 
                                 value={rating}
                                 onChange={(e) => setRating(e.target.value)}
-                                className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#a8e03e] mb-8"
+                                className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#00875a] mb-8"
                             />
 
                             <div className="flex gap-2 justify-center mb-8">
@@ -127,9 +127,9 @@ export default function SectionsManager() {
                                     <Star 
                                         key={i}
                                         size={32}
-                                        fill={i < Math.floor(numericRating) ? "#a8e03e" : "transparent"}
-                                        color={i < Math.floor(numericRating) ? "#a8e03e" : "rgba(255,255,255,0.1)"}
-                                        className={i < Math.floor(numericRating) ? "drop-shadow-[0_0_10px_rgba(168,224,62,0.3)]" : ""}
+                                        fill={i < Math.floor(numericRating) ? "#00875a" : "transparent"}
+                                        color={i < Math.floor(numericRating) ? "#00875a" : "rgba(255,255,255,0.1)"}
+                                        className={i < Math.floor(numericRating) ? "drop-shadow-[0_0_10px_rgba(0,135,90,0.3)]" : ""}
                                     />
                                 ))}
                             </div>
@@ -137,7 +137,7 @@ export default function SectionsManager() {
                             <button
                                 onClick={handleSave}
                                 disabled={saving}
-                                className="w-full bg-[#a8e03e] hover:bg-[#bef251] disabled:opacity-50 text-black font-black py-4 rounded-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-[0.98] uppercase tracking-widest text-sm"
+                                className="w-full bg-[#00875a] hover:bg-[#00c978] disabled:opacity-50 text-black font-black py-4 rounded-xl flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-[0.98] uppercase tracking-widest text-sm"
                             >
                                 {saving ? <RefreshCw className="animate-spin" size={18} /> : <Save size={18} />}
                                 {saving ? "Saving Changes..." : "Save Rating Configuration"}

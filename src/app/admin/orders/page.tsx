@@ -59,15 +59,15 @@ export default function OrdersPage() {
                                     <td style={{ padding: "14px 20px", color: "rgba(255,255,255,0.4)", fontSize: 12 }}>{order.razorpay_order_id}</td>
                                     <td style={{ padding: "14px 20px", fontWeight: 500, color: "#fff" }}>{order.candidate?.name || order.candidate}</td>
                                     <td style={{ padding: "14px 20px", color: "rgba(255,255,255,0.6)" }}>{order.course?.title || "N/A"}</td>
-                                    <td style={{ padding: "14px 20px", color: "#a8e03e", fontWeight: 600 }}>₹{order.amount}</td>
+                                    <td style={{ padding: "14px 20px", color: "#00875a", fontWeight: 600 }}>₹{order.amount}</td>
                                     <td style={{ padding: "14px 20px" }}>
                                         <span style={{ 
                                             padding: "4px 10px", 
                                             borderRadius: 20, 
                                             fontSize: 10, 
                                             fontWeight: 700,
-                                            background: order.status === "success" ? "rgba(168,224,62,0.1)" : "rgba(255,255,255,0.05)",
-                                            color: order.status === "success" ? "#a8e03e" : "rgba(255,255,255,0.4)"
+                                            background: order.status === "success" ? "rgba(0,135,90,0.1)" : "rgba(255,255,255,0.05)",
+                                            color: order.status === "success" ? "#00875a" : "rgba(255,255,255,0.4)"
                                         }}>
                                             {order.status.toUpperCase()}
                                         </span>

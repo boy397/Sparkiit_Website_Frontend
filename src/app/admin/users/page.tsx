@@ -170,8 +170,8 @@ export default function UsersPage() {
                         style={{
                             padding: "10px 24px",
                             borderRadius: 10,
-                            background: "#a8e03e",
-                            color: "#050505",
+                            background: "#00875a",
+                            color: "#ffffff",
                             fontWeight: 700,
                             border: "none",
                             cursor: "pointer"
@@ -197,7 +197,7 @@ export default function UsersPage() {
                                 <td style={{ padding: "16px 20px", color: "#fff", fontWeight: 500 }}>{u.username}</td>
                                 <td style={{ padding: "16px 20px", color: "rgba(255,255,255,0.6)" }}>{u.email}</td>
                                 <td style={{ padding: "16px 20px" }}>
-                                    <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 20, background: u.role === "SUPER_ADMIN" ? "rgba(168,224,62,0.1)" : "rgba(129,140,248,0.1)", color: u.role === "SUPER_ADMIN" ? "#a8e03e" : "#818cf8" }}>
+                                    <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 20, background: u.role === "SUPER_ADMIN" ? "rgba(0,135,90,0.1)" : "rgba(129,140,248,0.1)", color: u.role === "SUPER_ADMIN" ? "#00875a" : "#818cf8" }}>
                                         {u.role}
                                     </span>
                                 </td>
@@ -205,7 +205,7 @@ export default function UsersPage() {
                                 <td style={{ padding: "16px 20px" }}>
                                     {currentUser && u.role !== "SUPER_ADMIN" && (currentUser.role === "SUPER_ADMIN" || ROLES.indexOf(currentUser.role) <= ROLES.indexOf(u.role)) && (
                                         <div style={{ display: "flex", gap: "10px" }}>
-                                            <button onClick={() => handleEdit(u)} style={{ color: "#a8e03e", background: "none", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600 }}>Edit</button>
+                                            <button onClick={() => handleEdit(u)} style={{ color: "#00875a", background: "none", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600 }}>Edit</button>
                                             <button onClick={() => handleDelete(u._id)} style={{ color: "#f87171", background: "none", border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600 }}>Delete</button>
                                         </div>
                                     )}
@@ -231,7 +231,7 @@ export default function UsersPage() {
                         )}
                         {editingUserId && (
                             <div style={{ marginBottom: 16 }}>
-                                <p style={{ color: "#a8e03e", fontSize: 14, fontWeight: 600 }}>Editing: {form.username} ({form.email})</p>
+                                <p style={{ color: "#00875a", fontSize: 14, fontWeight: 600 }}>Editing: {form.username} ({form.email})</p>
                             </div>
                         )}
 
@@ -253,7 +253,7 @@ export default function UsersPage() {
                                                 setForm({ ...form, allowedSections: AVAILABLE_SECTIONS.map(s => s.key) });
                                             }
                                         }}
-                                        style={{ background: "none", border: "none", color: "#a8e03e", fontSize: 12, cursor: "pointer", fontWeight: 600 }}
+                                        style={{ background: "none", border: "none", color: "#00875a", fontSize: 12, cursor: "pointer", fontWeight: 600 }}
                                     >
                                         {form.allowedSections.length === AVAILABLE_SECTIONS.length ? "Deselect All" : "Select All"}
                                     </button>
@@ -281,7 +281,7 @@ export default function UsersPage() {
                                                         setForm({ ...form, allowedSections: form.allowedSections.filter(k => k !== section.key) });
                                                     }
                                                 }}
-                                                style={{ accentColor: "#a8e03e" }}
+                                                style={{ accentColor: "#00875a" }}
                                             />
                                             {section.label}
                                         </label>
@@ -291,7 +291,7 @@ export default function UsersPage() {
                         </div>
 
                         <div style={{ display: "flex", gap: 12, marginTop: 32, justifyContent: "flex-end" }}>
-                            <button onClick={handleSave} disabled={saving} style={{ padding: "12px 24px", borderRadius: 12, background: "#a8e03e", color: "#050505", fontWeight: 700, border: "none", cursor: "pointer" }}>{saving ? "Saving..." : "Save User"}</button>
+                            <button onClick={handleSave} disabled={saving} style={{ padding: "12px 24px", borderRadius: 12, background: "#00875a", color: "#ffffff", fontWeight: 700, border: "none", cursor: "pointer" }}>{saving ? "Saving..." : "Save User"}</button>
                         </div>
                     </div>
                 </div>

@@ -30,7 +30,7 @@ export default function BlogPage() {
                     <motion.p
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="text-[#a8e03e] font-bold uppercase tracking-[0.3em] text-xs mb-6"
+                        className="text-[#00875a] font-bold uppercase tracking-[0.3em] text-xs mb-6"
                     >
                         Our Blog
                     </motion.p>
@@ -60,12 +60,12 @@ export default function BlogPage() {
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
-                                    <div className="absolute top-6 left-6 bg-[#a8e03e] text-black px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-xl">
+                                    <div className="absolute top-6 left-6 bg-[#00875a] text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-xl">
                                         {post.category}
                                     </div>
                                 </div>
                                 <p className="text-white/40 text-xs font-bold tracking-[0.2em] mb-4">{post.date}</p>
-                                <h2 className="text-2xl font-bold leading-tight group-hover:text-[#a8e03e] transition-colors">{post.title}</h2>
+                                <h2 className="text-2xl font-bold leading-tight group-hover:text-[#00875a] transition-colors">{post.title}</h2>
                             </motion.div>
                         ))}
                     </div>

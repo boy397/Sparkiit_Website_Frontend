@@ -91,7 +91,7 @@ export default function ProjectManagement() {
     if (loading) {
         return (
             <div className="flex items-center justify-center min-h-[400px]">
-                <Loader2 className="animate-spin text-[#a8e03e]" size={32} />
+                <Loader2 className="animate-spin text-[#00875a]" size={32} />
             </div>
         );
     }
@@ -105,7 +105,7 @@ export default function ProjectManagement() {
                 </div>
                 <button 
                     onClick={() => setEditingProject({ num: "", title: "", category: "", image: "", order: projects.length + 1 })}
-                    className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#a8e03e] text-black font-bold hover:scale-[1.02] active:scale-[0.98] transition-all"
+                    className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#00875a] text-white font-bold hover:scale-[1.02] active:scale-[0.98] transition-all"
                 >
                     <Plus size={20} />
                     Add Project
@@ -126,7 +126,7 @@ export default function ProjectManagement() {
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                                 <button 
                                     onClick={() => setEditingProject(project)}
-                                    className="p-3 bg-white/10 hover:bg-[#a8e03e] hover:text-black rounded-full transition-all"
+                                    className="p-3 bg-white/10 hover:bg-[#00875a] hover:text-white rounded-full transition-all"
                                 >
                                     <Edit2 size={20} />
                                 </button>
@@ -139,7 +139,7 @@ export default function ProjectManagement() {
                             </div>
                         </div>
                         <div className="p-6">
-                            <p className="text-[#a8e03e] text-xs font-bold tracking-widest uppercase mb-1">{project.category}</p>
+                            <p className="text-[#00875a] text-xs font-bold tracking-widest uppercase mb-1">{project.category}</p>
                             <h3 className="text-lg font-bold text-white mb-4">{project.title}</h3>
                             <div className="flex justify-between items-center text-xs text-white/40 font-mono">
                                 <span>#{project.num}</span>
@@ -166,7 +166,7 @@ export default function ProjectManagement() {
                                         type="text" 
                                         value={editingProject.num}
                                         onChange={e => setEditingProject({...editingProject, num: e.target.value})}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#a8e03e]/40"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#00875a]/40"
                                         placeholder="01"
                                     />
                                 </div>
@@ -176,7 +176,7 @@ export default function ProjectManagement() {
                                         type="number" 
                                         value={editingProject.order}
                                         onChange={e => setEditingProject({...editingProject, order: parseInt(e.target.value)})}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#a8e03e]/40"
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#00875a]/40"
                                     />
                                 </div>
                             </div>
@@ -186,7 +186,7 @@ export default function ProjectManagement() {
                                     type="text" 
                                     value={editingProject.title}
                                     onChange={e => setEditingProject({...editingProject, title: e.target.value})}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#a8e03e]/40"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#00875a]/40"
                                     placeholder="Project Title"
                                 />
                             </div>
@@ -196,7 +196,7 @@ export default function ProjectManagement() {
                                     type="text" 
                                     value={editingProject.category}
                                     onChange={e => setEditingProject({...editingProject, category: e.target.value})}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#a8e03e]/40"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#00875a]/40"
                                     placeholder="WEB3 / BLOCKCHAIN"
                                 />
                             </div>
@@ -206,7 +206,7 @@ export default function ProjectManagement() {
                                     type="text" 
                                     value={editingProject.image}
                                     onChange={e => setEditingProject({...editingProject, image: e.target.value})}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#a8e03e]/40"
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-[#00875a]/40"
                                     placeholder="https://images.unsplash.com/..."
                                 />
                             </div>
@@ -221,7 +221,7 @@ export default function ProjectManagement() {
                             <button 
                                 onClick={handleSave}
                                 disabled={saving}
-                                className="flex items-center gap-2 px-8 py-2 rounded-xl bg-[#a8e03e] text-black font-bold hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
+                                className="flex items-center gap-2 px-8 py-2 rounded-xl bg-[#00875a] text-white font-bold hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
                             >
                                 {saving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
                                 Save Project
