@@ -243,8 +243,8 @@ export default function CandidatesPage() {
                     style={{
                         padding: "10px 24px",
                         borderRadius: 10,
-                        background: "linear-gradient(135deg, #a8e03e 0%, #7cb518 100%)",
-                        color: "#050505",
+                        background: "linear-gradient(135deg, #00875a 0%, #006644 100%)",
+                        color: "#ffffff",
                         fontWeight: 700,
                         fontSize: 14,
                         border: "none",
@@ -254,7 +254,7 @@ export default function CandidatesPage() {
                         gap: 8,
                         transition: "transform 0.15s, box-shadow 0.15s",
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 8px 25px rgba(168,224,62,0.3)"; }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 8px 25px rgba(0,135,90,0.3)"; }}
                     onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
                 >
                     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -268,7 +268,7 @@ export default function CandidatesPage() {
             <div style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, overflow: "hidden" }}>
                 {loading ? (
                     <div style={{ padding: 60, textAlign: "center", color: "rgba(255,255,255,0.3)" }}>
-                        <div style={{ width: 32, height: 32, border: "3px solid rgba(168,224,62,0.2)", borderTop: "3px solid #a8e03e", borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 12px" }} />
+                        <div style={{ width: 32, height: 32, border: "3px solid rgba(0,135,90,0.2)", borderTop: "3px solid #00875a", borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 12px" }} />
                         <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
                         Loading candidates...
                     </div>
@@ -303,7 +303,7 @@ export default function CandidatesPage() {
                                         <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
                                             {c.enrolledCourses?.length ? (
                                                 c.enrolledCourses.map((course) => (
-                                                    <span key={course._id} style={{ fontSize: 11, padding: "2px 8px", borderRadius: 6, background: "rgba(168,224,62,0.08)", color: "#a8e03e", fontWeight: 500 }}>
+                                                    <span key={course._id} style={{ fontSize: 11, padding: "2px 8px", borderRadius: 6, background: "rgba(0,135,90,0.08)", color: "#00875a", fontWeight: 500 }}>
                                                         {course.title}
                                                     </span>
                                                 ))
@@ -312,7 +312,7 @@ export default function CandidatesPage() {
                                             )}
                                         </div>
                                     </td>
-                                    <td style={{ padding: "14px 20px", fontSize: 13, color: "#a8e03e", fontWeight: 600 }}>₹{c.paymentDetails?.paidAmount || 0}</td>
+                                    <td style={{ padding: "14px 20px", fontSize: 13, color: "#00875a", fontWeight: 600 }}>₹{c.paymentDetails?.paidAmount || 0}</td>
                                     <td style={{ padding: "14px 20px", fontSize: 13, color: "#f87171", fontWeight: 600 }}>₹{c.paymentDetails?.remainingAmount || 0}</td>
                                     <td style={{ padding: "14px 20px" }}>
                                         <span style={{
@@ -326,7 +326,7 @@ export default function CandidatesPage() {
                                     </td>
                                     <td style={{ padding: "14px 20px" }}>
                                         <div style={{ display: "flex", gap: 6 }}>
-                                            <button onClick={() => setAssignModal(c)} style={{ padding: "6px 10px", borderRadius: 8, background: "rgba(168,224,62,0.1)", border: "1px solid rgba(168,224,62,0.15)", color: "#a8e03e", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                                            <button onClick={() => setAssignModal(c)} style={{ padding: "6px 10px", borderRadius: 8, background: "rgba(0,135,90,0.1)", border: "1px solid rgba(0,135,90,0.15)", color: "#00875a", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
                                                 Courses
                                             </button>
                                             <button onClick={() => openEdit(c)} style={{ padding: "6px 10px", borderRadius: 8, background: "rgba(129,140,248,0.1)", border: "1px solid rgba(129,140,248,0.15)", color: "#818cf8", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
@@ -385,7 +385,7 @@ export default function CandidatesPage() {
 
                             {/* New Dashboard Metrics */}
                             <div style={{ padding: "16px 0", borderTop: "1px solid rgba(255,255,255,0.06)", marginTop: 8 }}>
-                                <h3 style={{ fontSize: 13, fontWeight: 700, color: "#a8e03e", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>Dashboard Metrics</h3>
+                                <h3 style={{ fontSize: 13, fontWeight: 700, color: "#00875a", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>Dashboard Metrics</h3>
                                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
                                     <div>
                                         <label style={labelStyle}>Batch Rank</label>
@@ -417,7 +417,7 @@ export default function CandidatesPage() {
 
                             {/* Skill Matrix */}
                             <div style={{ padding: "16px 0", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                                <h3 style={{ fontSize: 13, fontWeight: 700, color: "#a8e03e", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>Skill Matrix (%)</h3>
+                                <h3 style={{ fontSize: 13, fontWeight: 700, color: "#00875a", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>Skill Matrix (%)</h3>
                                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                                     {Object.keys(form.skills).map((skill) => (
                                         <div key={skill}>
@@ -438,7 +438,7 @@ export default function CandidatesPage() {
                             <button onClick={() => setModalOpen(false)} style={{ padding: "10px 20px", borderRadius: 10, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.6)", fontWeight: 600, fontSize: 14, cursor: "pointer" }}>
                                 Cancel
                             </button>
-                            <button onClick={handleSave} disabled={saving || !form.name || !form.email} style={{ padding: "10px 24px", borderRadius: 10, background: saving || !form.name || !form.email ? "rgba(168,224,62,0.3)" : "linear-gradient(135deg, #a8e03e, #7cb518)", color: "#050505", fontWeight: 700, fontSize: 14, border: "none", cursor: saving || !form.name || !form.email ? "not-allowed" : "pointer" }}>
+                            <button onClick={handleSave} disabled={saving || !form.name || !form.email} style={{ padding: "10px 24px", borderRadius: 10, background: saving || !form.name || !form.email ? "rgba(0,135,90,0.3)" : "linear-gradient(135deg, #00875a, #006644)", color: "#ffffff", fontWeight: 700, fontSize: 14, border: "none", cursor: saving || !form.name || !form.email ? "not-allowed" : "pointer" }}>
                                 {saving ? "Saving..." : editing ? "Update" : "Create"}
                             </button>
                         </div>
@@ -474,7 +474,7 @@ export default function CandidatesPage() {
                 <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 100 }} onClick={() => setAssignModal(null)}>
                     <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: 32, width: 520, maxHeight: "85vh", overflowY: "auto" }} onClick={(e) => e.stopPropagation()}>
                         <h2 style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 4 }}>Manage Courses</h2>
-                        <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 24 }}>for <span style={{ color: "#a8e03e", fontWeight: 600 }}>{assignModal.name}</span></p>
+                        <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 24 }}>for <span style={{ color: "#00875a", fontWeight: 600 }}>{assignModal.name}</span></p>
 
                         {/* Enrolled Courses */}
                         <div style={{ marginBottom: 24 }}>
@@ -523,8 +523,8 @@ export default function CandidatesPage() {
                                     style={{
                                         padding: "10px 20px",
                                         borderRadius: 10,
-                                        background: !selectedCourse ? "rgba(168,224,62,0.3)" : "linear-gradient(135deg, #a8e03e, #7cb518)",
-                                        color: "#050505",
+                                        background: !selectedCourse ? "rgba(0,135,90,0.3)" : "linear-gradient(135deg, #00875a, #006644)",
+                                        color: "#ffffff",
                                         fontWeight: 700,
                                         fontSize: 13,
                                         border: "none",

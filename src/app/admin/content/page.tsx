@@ -79,7 +79,7 @@ export default function ContentManagement() {
     if (loading) {
         return (
             <div className="flex items-center justify-center min-h-[400px]">
-                <Loader2 className="animate-spin text-[#a8e03e]" size={32} />
+                <Loader2 className="animate-spin text-[#00875a]" size={32} />
             </div>
         );
     }
@@ -109,7 +109,7 @@ export default function ContentManagement() {
                     <button 
                         onClick={saveChanges}
                         disabled={saving}
-                        className="flex items-center gap-2 px-6 py-2 rounded-xl bg-[#a8e03e] text-black font-bold hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
+                        className="flex items-center gap-2 px-6 py-2 rounded-xl bg-[#00875a] text-white font-bold hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
                     >
                         {saving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
                         Save Changes
@@ -118,7 +118,7 @@ export default function ContentManagement() {
             </div>
 
             {message && (
-                <div className={`mb-8 p-4 rounded-2xl flex items-center gap-3 ${message.type === 'success' ? 'bg-[#a8e03e]/10 border border-[#a8e03e]/20 text-[#a8e03e]' : 'bg-red-500/10 border border-red-500/20 text-red-500'}`}>
+                <div className={`mb-8 p-4 rounded-2xl flex items-center gap-3 ${message.type === 'success' ? 'bg-[#00875a]/10 border border-[#00875a]/20 text-[#00875a]' : 'bg-red-500/10 border border-red-500/20 text-red-500'}`}>
                     {message.type === 'success' ? <CheckCircle2 size={20} /> : <AlertCircle size={20} />}
                     <span className="font-medium">{message.text}</span>
                 </div>
@@ -128,7 +128,7 @@ export default function ContentManagement() {
                 {Object.entries(sections).map(([sectionName, items]) => (
                     <div key={sectionName} className="bg-white/2 backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden">
                         <div className="bg-white/5 px-8 py-4 border-b border-white/5">
-                            <h3 className="text-sm font-bold uppercase tracking-widest text-[#a8e03e]">{sectionName} Section</h3>
+                            <h3 className="text-sm font-bold uppercase tracking-widest text-[#00875a]">{sectionName} Section</h3>
                         </div>
                         <div className="p-8 space-y-6">
                             {items.map(item => (
@@ -139,7 +139,7 @@ export default function ContentManagement() {
                                     <textarea
                                         value={item.value}
                                         onChange={(e) => handleUpdate(item._id, e.target.value)}
-                                        className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#a8e03e]/40 transition-all resize-none min-h-[44px]"
+                                        className="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00875a]/40 transition-all resize-none min-h-[44px]"
                                         rows={item.value.length > 100 ? 4 : 1}
                                     />
                                 </div>

@@ -103,8 +103,8 @@ export default function BlogsPage() {
                     style={{
                         padding: "10px 24px",
                         borderRadius: 10,
-                        background: "linear-gradient(135deg, #a8e03e 0%, #7cb518 100%)",
-                        color: "#050505",
+                        background: "linear-gradient(135deg, #00875a 0%, #006644 100%)",
+                        color: "#ffffff",
                         fontWeight: 700,
                         fontSize: 14,
                         border: "none",
@@ -141,7 +141,7 @@ export default function BlogsPage() {
                                     <td style={{ padding: "14px 20px", color: "rgba(255,255,255,0.6)" }}>{blog.category}</td>
                                     <td style={{ padding: "14px 20px", color: "rgba(255,255,255,0.4)", fontSize: 12 }}>{new Date(blog.createdAt).toLocaleDateString()}</td>
                                     <td style={{ padding: "14px 20px" }}>
-                                        <button onClick={() => openEdit(blog)} style={{ marginRight: 10, color: "#a8e03e", background: "none", border: "none", cursor: "pointer" }}>Edit</button>
+                                        <button onClick={() => openEdit(blog)} style={{ marginRight: 10, color: "#00875a", background: "none", border: "none", cursor: "pointer" }}>Edit</button>
                                         <button onClick={() => setDeleteConfirm(blog._id)} style={{ color: "#ef4444", background: "none", border: "none", cursor: "pointer" }}>Delete</button>
                                     </td>
                                 </tr>
@@ -182,7 +182,7 @@ export default function BlogsPage() {
                         </div>
                         <div style={{ display: "flex", gap: 12, marginTop: 28, justifyContent: "flex-end" }}>
                             <button onClick={() => setModalOpen(false)} style={{ padding: "10px 20px", borderRadius: 10, background: "rgba(255,255,255,0.06)", border: "none", color: "#fff", cursor: "pointer" }}>Cancel</button>
-                            <button onClick={handleSave} style={{ padding: "10px 24px", borderRadius: 10, background: "#a8e03e", color: "#000", fontWeight: 700, border: "none", cursor: "pointer" }}>{saving ? "Saving..." : "Save"}</button>
+                            <button onClick={handleSave} style={{ padding: "10px 24px", borderRadius: 10, background: "#00875a", color: "#000", fontWeight: 700, border: "none", cursor: "pointer" }}>{saving ? "Saving..." : "Save"}</button>
                         </div>
                     </div>
                 </div>

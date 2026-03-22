@@ -122,7 +122,7 @@ function NavItemComponent({ item, sidebarOpen, pathname, user, onClick }: { item
                         border: "none",
                         fontSize: 14,
                         fontWeight: isSubActive ? 600 : 450,
-                        color: isSubActive ? "#a8e03e" : "rgba(255,255,255,0.55)",
+                        color: isSubActive ? "#00875a" : "rgba(255,255,255,0.55)",
                         background: isSubActive ? "rgba(168, 224, 62, 0.08)" : "transparent",
                         transition: "all 0.2s ease",
                         justifyContent: sidebarOpen ? "flex-start" : "center",
@@ -155,7 +155,7 @@ function NavItemComponent({ item, sidebarOpen, pathname, user, onClick }: { item
                                         textDecoration: "none",
                                         fontSize: 13,
                                         fontWeight: isSubItemActive ? 600 : 450,
-                                        color: isSubItemActive ? "#a8e03e" : "rgba(255,255,255,0.55)",
+                                        color: isSubItemActive ? "#00875a" : "rgba(255,255,255,0.55)",
                                         background: isSubItemActive ? "rgba(168, 224, 62, 0.08)" : "transparent",
                                         transition: "all 0.2s ease",
                                     }}
@@ -185,7 +185,7 @@ function NavItemComponent({ item, sidebarOpen, pathname, user, onClick }: { item
                 textDecoration: "none",
                 fontSize: 14,
                 fontWeight: isActive ? 600 : 450,
-                color: isActive ? "#a8e03e" : "rgba(255,255,255,0.55)",
+                color: isActive ? "#00875a" : "rgba(255,255,255,0.55)",
                 background: isActive ? "rgba(168, 224, 62, 0.08)" : "transparent",
                 transition: "all 0.2s ease",
                 justifyContent: sidebarOpen ? "flex-start" : "center",
@@ -287,7 +287,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 display: "flex", 
                 alignItems: "center", 
                 justifyContent: "center",
-                color: "#a8e03e",
+                color: "#00875a",
                 fontFamily: "Inter, sans-serif"
             }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 20 }}>
@@ -295,7 +295,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         width: 40, 
                         height: 40, 
                         border: "3px solid rgba(168, 224, 62, 0.1)", 
-                        borderTopColor: "#a8e03e", 
+                        borderTopColor: "#00875a", 
                         borderRadius: "50%", 
                         animation: "spin 1s linear infinite" 
                     }} />
@@ -391,13 +391,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                             width: 38,
                             height: 38,
                             borderRadius: 10,
-                            background: "linear-gradient(135deg, #a8e03e 0%, #7cb518 100%)",
+                            background: "linear-gradient(135deg, #00875a 0%, #006644 100%)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                             fontWeight: 800,
                             fontSize: 16,
-                            color: "#050505",
+                            color: "#ffffff",
                             flexShrink: 0,
                         }}
                     >
@@ -544,13 +544,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                                 width: 34,
                                 height: 34,
                                 borderRadius: "50%",
-                                background: "linear-gradient(135deg, #a8e03e, #7cb518)",
+                                background: "linear-gradient(135deg, #00875a, #006644)",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 fontWeight: 700,
                                 fontSize: 13,
-                                color: "#050505",
+                                color: "#ffffff",
                             }}
                         >
                             {user?.username?.charAt(0).toUpperCase() || 'A'}
