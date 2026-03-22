@@ -27,7 +27,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#050505] flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-[#a8e03e]/20 border-t-[#a8e03e] rounded-full animate-spin"></div>
+        <div className="w-16 h-16 border-4 border-[#00875a]/20 border-t-[#00875a] rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -83,7 +83,7 @@ export default function Home() {
     : defaultStructureNames;
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white selection:bg-[#a8e03e] selection:text-black">
+    <main className="min-h-screen bg-[#050505] text-white selection:bg-[#00875a] selection:text-black">
       <Navbar />
       
       {pageStructure.map((sectionName, index) => (

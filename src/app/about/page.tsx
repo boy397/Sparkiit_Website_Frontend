@@ -18,7 +18,7 @@ export default function AboutPage() {
                         <motion.p
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="text-[#a8e03e] font-bold uppercase tracking-[0.3em] text-xs mb-6"
+                            className="text-[#00875a] font-bold uppercase tracking-[0.3em] text-xs mb-6"
                         >
                             Who We Are
                         </motion.p>
@@ -40,7 +40,7 @@ export default function AboutPage() {
                         <p className="text-gray-400 leading-relaxed mb-8">
                             A collective of designers, developers, and strategists dedicated to pushing the boundaries of what&apos;s possible in the digital realm.
                         </p>
-                        <button className="bg-[#a8e03e] text-black px-8 py-4 rounded-full font-bold uppercase text-xs tracking-widest hover:scale-105 transition-transform">
+                        <button className="bg-[#00875a] text-white px-8 py-4 rounded-full font-bold uppercase text-xs tracking-widest hover:scale-105 transition-transform">
                             Get Started
                         </button>
                     </motion.div>
@@ -51,7 +51,7 @@ export default function AboutPage() {
 
             <section className="py-24 px-6 md:px-20 bg-white/5">
                 <div className="max-w-7xl mx-auto">
-                    <h2 className="text-3xl font-bold uppercase tracking-tighter mb-12 border-l-4 border-[#a8e03e] pl-6">Core Values</h2>
+                    <h2 className="text-3xl font-bold uppercase tracking-tighter mb-12 border-l-4 border-[#00875a] pl-6">Core Values</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {["Innovation", "Integrity", "Excellence"].map((val, i) => (
                             <div key={i} className="p-10 rounded-3xl border border-white/10 bg-[#050505]">

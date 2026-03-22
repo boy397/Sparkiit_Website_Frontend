@@ -134,17 +134,17 @@ export default function AdminDashboard() {
     ];
     
     const cmsActions = [
-        { title: "CMS USER", desc: "Admin & Staff Roles", icon: Settings, link: "/admin/users", color: "#a8e03e" },
+        { title: "CMS USER", desc: "Admin & Staff Roles", icon: Settings, link: "/admin/users", color: "#00875a" },
     ];
 
     const websiteActions = [
-        { title: "MANAGE COURSES", desc: "Curriculum & Lessons", icon: BookOpen, link: "/admin/courses", color: "#a8e03e" },
+        { title: "MANAGE COURSES", desc: "Curriculum & Lessons", icon: BookOpen, link: "/admin/courses", color: "#00875a" },
         { title: "MANAGE BLOGS", desc: "Articles & News", icon: FileText, link: "/admin/blogs", color: "#5eead4" },
         { title: "MANAGE SERVICES", desc: "Platform Config", icon: Monitor, link: "/admin/services", color: "#60a5fa" },
         { title: "SECTIONS", desc: "Home Page Layout", icon: Blocks, link: "/admin/sections", color: "#ec4899" },
         { title: "BRANDS", desc: "Partner Logos", icon: Copyright, link: "/admin/brands", color: "#a855f7" },
         { title: "MANAGE MENTORS", desc: "Slider Profiles", icon: Users, link: "/admin/mentors", color: "#10b981" },
-        { title: "MANAGE EVENTS", desc: "Ongoing/Upcoming/Past", icon: Calendar, link: "/admin/events", color: "#a8e03e" },
+        { title: "MANAGE EVENTS", desc: "Ongoing/Upcoming/Past", icon: Calendar, link: "/admin/events", color: "#00875a" },
         { title: "FOOTER", desc: "Bottom Layout", icon: PanelBottom, link: "/admin/footer-settings", color: "#64748b" },
         { title: "MENU BUILDER", desc: "Navigation Links", icon: LayoutGrid, link: "/admin/menu-builder", color: "#06b6d4" },
         { title: "PAGE BUILDER", desc: "Static Pages", icon: FilePlus, link: "/admin/page-builder", color: "#84cc16" },
@@ -157,7 +157,7 @@ export default function AdminDashboard() {
         return (
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: 400, color: "rgba(255,255,255,0.3)" }}>
                 <div style={{ textAlign: "center" }}>
-                    <div style={{ width: 40, height: 40, border: "3px solid rgba(168,224,62,0.2)", borderTop: "3px solid #a8e03e", borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
+                    <div style={{ width: 40, height: 40, border: "3px solid rgba(0,135,90,0.2)", borderTop: "3px solid #00875a", borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
                     <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
                     Loading dashboard...
                 </div>
@@ -170,7 +170,7 @@ export default function AdminDashboard() {
             {/* Header */}
             <div style={{ marginBottom: 32 }}>
                 <h1 style={{ fontSize: 28, fontWeight: 800, color: "#fff", marginBottom: 8, textTransform: "uppercase" }}>
-                    Admin <span style={{ color: "#a8e03e" }}>Control Center</span>
+                    Admin <span style={{ color: "#00875a" }}>Control Center</span>
                 </h1>
                 <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 14 }}>Welcome back. What would you like to manage today?</p>
             </div>
@@ -181,13 +181,13 @@ export default function AdminDashboard() {
             <ActionSection title="WEBSITE & CONFIGURATION" actions={websiteActions} cardStyle={cardStyle} />
 
             <h2 style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 24, marginTop: 12, textTransform: "uppercase", letterSpacing: "0.05em", display: "flex", alignItems: "center", gap: 10 }}>
-                <LayoutDashboard size={20} color="#a8e03e" /> Overview Analytics
+                <LayoutDashboard size={20} color="#00875a" /> Overview Analytics
             </h2>
 
             {/* Stats Cards */}
             <div style={{ display: "flex", gap: 20, flexWrap: "wrap", marginBottom: 32 }}>
                 <div style={cardStyle}>
-                    <div style={{ ...statNumber, color: "#a8e03e" }}>{stats?.totalCourses ?? 0}</div>
+                    <div style={{ ...statNumber, color: "#00875a" }}>{stats?.totalCourses ?? 0}</div>
                     <div style={statLabel}>Total Courses</div>
                 </div>
                 <div style={cardStyle}>
@@ -221,8 +221,8 @@ export default function AdminDashboard() {
                                         fontWeight: 600,
                                         padding: "3px 10px",
                                         borderRadius: 20,
-                                        background: c.status === "active" ? "rgba(168,224,62,0.12)" : c.status === "draft" ? "rgba(251,191,36,0.12)" : "rgba(255,255,255,0.06)",
-                                        color: c.status === "active" ? "#a8e03e" : c.status === "draft" ? "#fbbf24" : "rgba(255,255,255,0.4)",
+                                        background: c.status === "active" ? "rgba(0,135,90,0.12)" : c.status === "draft" ? "rgba(251,191,36,0.12)" : "rgba(255,255,255,0.06)",
+                                        color: c.status === "active" ? "#00875a" : c.status === "draft" ? "#fbbf24" : "rgba(255,255,255,0.4)",
                                         textTransform: "uppercase",
                                         letterSpacing: "0.04em",
                                     }}>
