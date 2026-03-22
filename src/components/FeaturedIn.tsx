@@ -18,11 +18,11 @@ export default function FeaturedIn() {
                     className="flex flex-col items-center gap-12"
                 >
                     <div className="flex flex-col items-center gap-4">
-                        <span className="text-[#a8e03e] font-bold uppercase tracking-[0.3em] text-[10px] border border-[#a8e03e]/20 px-4 py-2 rounded-full backdrop-blur-sm">
+                        <span className="text-[#00875a] font-bold uppercase tracking-[0.3em] text-[10px] border border-[#00875a]/20 px-4 py-2 rounded-full backdrop-blur-sm">
                             As Seen On
                         </span>
                         <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter">
-                            Featured <span className="text-[#a8e03e]">In</span>
+                            Featured <span className="text-[#00875a]">In</span>
                         </h2>
                     </div>
 
@@ -34,7 +34,7 @@ export default function FeaturedIn() {
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="text-xl md:text-3xl font-black text-white hover:text-[#a8e03e] hover:opacity-100 transition-all duration-300 cursor-default uppercase tracking-tighter"
+                                className="text-xl md:text-3xl font-black text-white hover:text-[#00875a] hover:opacity-100 transition-all duration-300 cursor-default uppercase tracking-tighter"
                             >
                                 {pub}
                             </motion.span>

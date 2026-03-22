@@ -54,7 +54,7 @@ export default function HorizontalScrollSection() {
         <section className="relative min-h-screen bg-[#050505] flex flex-col items-center justify-center overflow-hidden py-12 px-6 md:px-20">
             {/* Background Accents */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#a8e03e]/5 rounded-full blur-[120px]" />
+                <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#00875a]/5 rounded-full blur-[120px]" />
                 <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px]" />
             </div>
 
@@ -62,12 +62,12 @@ export default function HorizontalScrollSection() {
                 <motion.span 
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    className="text-[#a8e03e] font-bold uppercase tracking-[0.4em] text-[10px] border border-[#a8e03e]/20 px-6 py-2 rounded-full backdrop-blur-md mb-8 inline-block"
+                    className="text-[#00875a] font-bold uppercase tracking-[0.4em] text-[10px] border border-[#00875a]/20 px-6 py-2 rounded-full backdrop-blur-md mb-8 inline-block"
                 >
                     {/* Premium Solutions */}
                 </motion.span>
                 <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">
-                    Domains <span className="text-[#a8e03e]">We Serve</span>
+                    Domains <span className="text-[#00875a]">We Serve</span>
                 </h2>
             </div>
 
@@ -75,13 +75,13 @@ export default function HorizontalScrollSection() {
                 {/* Navigation Arrows */}
                 <button 
                     onClick={handlePrev}
-                    className="absolute left-4 md:-left-12 z-[100] w-14 h-14 rounded-full bg-[#a8e03e] text-black border border-[#a8e03e]/20 flex items-center justify-center hover:bg-white hover:border-white transition-all shadow-[0_0_30px_rgba(168,224,62,0.3)] group"
+                    className="absolute left-4 md:-left-12 z-[100] w-14 h-14 rounded-full bg-[#00875a] text-white border border-[#00875a]/20 flex items-center justify-center hover:bg-white hover:border-white transition-all shadow-[0_0_30px_rgba(0,135,90,0.3)] group"
                 >
                     <ChevronLeft className="group-hover:-translate-x-1 transition-transform" />
                 </button>
                 <button 
                     onClick={handleNext}
-                    className="absolute right-4 md:-right-12 z-[100] w-14 h-14 rounded-full bg-[#a8e03e] text-black border border-[#a8e03e]/20 flex items-center justify-center hover:bg-white hover:border-white transition-all shadow-[0_0_30px_rgba(168,224,62,0.3)] group"
+                    className="absolute right-4 md:-right-12 z-[100] w-14 h-14 rounded-full bg-[#00875a] text-white border border-[#00875a]/20 flex items-center justify-center hover:bg-white hover:border-white transition-all shadow-[0_0_30px_rgba(0,135,90,0.3)] group"
                 >
                     <ChevronRight className="group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -118,8 +118,8 @@ export default function HorizontalScrollSection() {
                                 className="absolute w-[300px] md:w-[450px] aspect-[4/5] md:aspect-[3/4] rounded-[2rem] overflow-hidden group cursor-pointer"
                                 style={{
                                     zIndex: 50 - Math.abs(displayOffset),
-                                    boxShadow: isCenter ? "0 40px 100px -20px rgba(0,0,0,0.8), 0 0 50px rgba(168,224,62,0.1)" : "none",
-                                    border: isCenter ? "1px solid rgba(168,224,62,0.3)" : "1px solid rgba(255,255,255,0.05)",
+                                    boxShadow: isCenter ? "0 40px 100px -20px rgba(0,0,0,0.8), 0 0 50px rgba(0,135,90,0.1)" : "none",
+                                    border: isCenter ? "1px solid rgba(0,135,90,0.3)" : "1px solid rgba(255,255,255,0.05)",
                                 }}
                             >
                                 {/* Card Background */}
@@ -136,10 +136,10 @@ export default function HorizontalScrollSection() {
                                 <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
                                     <div className="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <span className="w-10 h-px bg-[#a8e03e]/40" />
-                                            <span className="text-[#a8e03e] font-mono text-xs tracking-widest">{service.num} — {service.category}</span>
+                                            <span className="w-10 h-px bg-[#00875a]/40" />
+                                            <span className="text-[#00875a] font-mono text-xs tracking-widest">{service.num} — {service.category}</span>
                                         </div>
-                                        <h3 className="text-2xl md:text-3xl font-black text-white uppercase leading-none mb-4 group-hover:text-[#a8e03e] transition-colors">{service.title}</h3>
+                                        <h3 className="text-2xl md:text-3xl font-black text-white uppercase leading-none mb-4 group-hover:text-[#00875a] transition-colors">{service.title}</h3>
                                         <p className="text-gray-400 text-sm md:text-base leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 max-w-xs">
                                             {service.description}
                                         </p>
@@ -160,7 +160,7 @@ export default function HorizontalScrollSection() {
                     <button
                         key={i}
                         onClick={() => setActiveIndex(i)}
-                        className={`h-1.5 transition-all duration-500 rounded-full ${i === activeIndex ? "w-12 bg-[#a8e03e]" : "w-3 bg-white/10 hover:bg-white/20"}`}
+                        className={`h-1.5 transition-all duration-500 rounded-full ${i === activeIndex ? "w-12 bg-[#00875a]" : "w-3 bg-white/10 hover:bg-white/20"}`}
                     />
                 ))}
             </div>

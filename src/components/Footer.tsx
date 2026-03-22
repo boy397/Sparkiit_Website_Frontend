@@ -21,7 +21,7 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-12">
                 <div className="lg:col-span-1">
                     <div className="flex items-center gap-2 mb-8">
-                        <div className="bg-[#a8e03e] text-black w-8 h-8 flex items-center justify-center rounded-sm">
+                        <div className="bg-[#00875a] text-white w-8 h-8 flex items-center justify-center rounded-sm">
                             <Plus size={20} className="font-bold border-2 border-black rounded-sm" />
                         </div>
                         <span className="text-xl font-bold tracking-widest uppercase text-white">{site.logoText}</span>
@@ -30,10 +30,10 @@ export default function Footer() {
                         {site.footerDesc}
                     </p>
                     <div className="flex gap-4">
-                        <Link href={site.github || "#"}><Github className="text-white/40 hover:text-[#a8e03e] cursor-pointer transition-colors" size={20} /></Link>
-                        <Link href={site.twitter || "#"}><Twitter className="text-white/40 hover:text-[#a8e03e] cursor-pointer transition-colors" size={20} /></Link>
-                        <Link href={site.linkedin || "#"}><Linkedin className="text-white/40 hover:text-[#a8e03e] cursor-pointer transition-colors" size={20} /></Link>
-                        <Link href={site.instagram || "#"}><Instagram className="text-white/40 hover:text-[#a8e03e] cursor-pointer transition-colors" size={20} /></Link>
+                        <Link href={site.github || "#"}><Github className="text-white/40 hover:text-[#00875a] cursor-pointer transition-colors" size={20} /></Link>
+                        <Link href={site.twitter || "#"}><Twitter className="text-white/40 hover:text-[#00875a] cursor-pointer transition-colors" size={20} /></Link>
+                        <Link href={site.linkedin || "#"}><Linkedin className="text-white/40 hover:text-[#00875a] cursor-pointer transition-colors" size={20} /></Link>
+                        <Link href={site.instagram || "#"}><Instagram className="text-white/40 hover:text-[#00875a] cursor-pointer transition-colors" size={20} /></Link>
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@ export default function Footer() {
                             placeholder="Email Address"
                             className="bg-transparent border-none focus:ring-0 text-white w-full placeholder:text-white/20"
                         />
-                        <button className="text-[#a8e03e] font-bold uppercase text-xs tracking-widest">SUBMIT</button>
+                        <button className="text-[#00875a] font-bold uppercase text-xs tracking-widest">SUBMIT</button>
                     </div>
                 </div>
             </div>

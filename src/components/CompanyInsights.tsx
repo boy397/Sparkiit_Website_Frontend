@@ -40,9 +40,9 @@ export default function CompanyInsights() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: index * 0.1 }}
-                            className="bg-white/5 p-6 md:p-10 rounded-3xl border border-white/5 text-center group hover:border-[#a8e03e]/30 transition-all"
+                            className="bg-white/5 p-6 md:p-10 rounded-3xl border border-white/5 text-center group hover:border-[#00875a]/30 transition-all"
                         >
-                            <h4 className="text-gray-500 font-bold uppercase tracking-widest text-[10px] sm:text-xs mb-4 group-hover:text-[#a8e03e] transition-colors">{stat.label}</h4>
+                            <h4 className="text-gray-500 font-bold uppercase tracking-widest text-[10px] sm:text-xs mb-4 group-hover:text-[#00875a] transition-colors">{stat.label}</h4>
                             <p className="text-4xl sm:text-5xl font-black text-white tracking-tighter">
                                 <Counter value={stat.val} />+
                             </p>
@@ -59,7 +59,7 @@ export default function CompanyInsights() {
                             Stay up to date with the latest trends in Blockchain, DeFi, and digital design through our curated blog posts.
                         </p>
                     </div>
-                    <button className="bg-[#a8e03e] text-black px-10 py-5 rounded-full font-bold uppercase text-sm hover:scale-105 active:scale-95 transition-all">
+                    <button className="bg-[#00875a] text-white px-10 py-5 rounded-full font-bold uppercase text-sm hover:scale-105 active:scale-95 transition-all">
                         Browse Full Blog
                     </button>
                 </div>

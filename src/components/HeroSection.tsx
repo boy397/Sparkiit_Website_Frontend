@@ -62,8 +62,8 @@ export default function HeroSection() {
     return (
         <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center px-6 md:px-20 pt-20 overflow-hidden">
             {/* Background gradients/effects mimicking the reference */}
-            <div className="absolute top-0 right-0 w-[80vw] h-[80vh] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[50vw] h-[50vh] bg-red-600/10 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[80vw] h-[80vh] bg-[#00875a]/10 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[50vw] h-[50vh] bg-[#006644]/10 blur-[120px] rounded-full pointer-events-none" />
 
             <div className="relative z-10 max-w-5xl">
                 <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold uppercase leading-[0.9] tracking-tighter">
@@ -86,7 +86,7 @@ export default function HeroSection() {
                                             y: springY
                                         }}
                                         transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
-                                        className="inline-block mr-4 text-[#a8e03e] cursor-default"
+                                        className="inline-block mr-4 text-[#00875a] cursor-default"
                                     >
                                         ✦
                                     </motion.span>
@@ -109,16 +109,16 @@ export default function HeroSection() {
                 </div>
 
                 <div className="relative w-full max-w-sm rounded-xl overflow-hidden border border-white/10 p-4 bg-white/5 backdrop-blur-md">
-                    <div className="relative h-48 rounded-lg overflow-hidden bg-gradient-to-br from-blue-900/50 to-red-900/50 flex items-center justify-center group cursor-pointer">
+                    <div className="relative h-48 rounded-lg overflow-hidden bg-gradient-to-br from-[#006644]/50 to-[#00875a]/50 flex items-center justify-center group cursor-pointer">
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
                         <div className="relative flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
-                            <Play className="text-[#a8e03e] ml-1" size={20} fill="#a8e03e" />
+                            <Play className="text-[#00875a] ml-1" size={20} fill="#00875a" />
                         </div>
                     </div>
                     <div className="absolute bottom-6 right-6 text-right drop-shadow-lg">
                         <p className="text-2xl font-light">DESIGN</p>
                         <p className="text-2xl font-bold">
-                            TRENDS <span className="text-[#a8e03e]">2026</span>
+                            TRENDS <span className="text-[#00875a]">2026</span>
                         </p>
                     </div>
                 </div>
