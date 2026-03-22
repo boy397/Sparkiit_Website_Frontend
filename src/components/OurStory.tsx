@@ -35,7 +35,7 @@ export default function OurStory() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="text-[#a8e03e] font-bold uppercase tracking-[0.3em] text-xs mb-6"
+                        className="text-[#00875a] font-bold uppercase tracking-[0.3em] text-xs mb-6"
                     >
                         Our Story
                     </motion.p>

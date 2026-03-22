@@ -62,7 +62,7 @@ function HoverWordTitle({ text }: { text: string }) {
                             hovered: { y: 0 }
                         }}
                         transition={{ duration: 0.4, delay: i * 0.05, ease: [0.33, 1, 0.68, 1] }}
-                        className="absolute inset-0 text-[#a8e03e] inline-block"
+                        className="absolute inset-0 text-[#00875a] inline-block"
                     >
                         {word}
                     </motion.span>
@@ -92,7 +92,7 @@ function HoverText({ text }: { text: string }) {
                 ))}
             </div>
             
-            <div className="absolute inset-0 flex text-[#a8e03e]">
+            <div className="absolute inset-0 flex text-[#00875a]">
                 {text.split("").map((char, i) => (
                     <motion.span
                         key={i}
@@ -147,11 +147,11 @@ function RecognitionCard({ item, index }: { item: any; index: number }) {
                     {/* <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tighter uppercase">
                         <HoverText text={item.title} />
                     </h3> */}
-                    {/* <p className="text-gray-500 text-xs font-bold tracking-[0.2em] underline decoration-[#a8e03e]/30 underline-offset-8 uppercase">
+                    {/* <p className="text-gray-500 text-xs font-bold tracking-[0.2em] underline decoration-[#00875a]/30 underline-offset-8 uppercase">
                         View details
                     </p> */}
                 </div>
-                {/* <span className="text-4xl font-black text-white/5 group-hover:text-[#a8e03e]/20 transition-colors">
+                {/* <span className="text-4xl font-black text-white/5 group-hover:text-[#00875a]/20 transition-colors">
                     {item.num}
                 </span> */}
             </div>

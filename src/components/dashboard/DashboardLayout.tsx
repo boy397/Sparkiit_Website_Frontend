@@ -50,7 +50,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             {/* Sidebar Desktop */}
             <aside className="hidden lg:flex flex-col w-64 border-r border-white/5 bg-[#0a0a0a] sticky top-0 h-screen">
                 <div className="p-8">
-                    <Link href="/" className="text-2xl font-black tracking-tighter text-[#a8e03e]">
+                    <Link href="/" className="text-2xl font-black tracking-tighter text-[#00875a]">
                         SPARKIIT<span className="text-white">.</span>
                     </Link>
                 </div>
@@ -64,7 +64,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                 href={link.href}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
                                     isActive 
-                                    ? "bg-[#a8e03e] text-black font-bold" 
+                                    ? "bg-[#00875a] text-white font-bold" 
                                     : "text-gray-400 hover:text-white hover:bg-white/5"
                                 }`}
                             >
@@ -88,7 +88,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
             {/* Mobile Header */}
             <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#0a0a0a] border-b border-white/5 flex items-center justify-between px-6 z-50">
-                <Link href="/" className="text-xl font-black tracking-tighter text-[#a8e03e]">
+                <Link href="/" className="text-xl font-black tracking-tighter text-[#00875a]">
                     SPARKIIT
                 </Link>
                 <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -113,7 +113,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className={`flex items-center gap-4 px-6 py-4 rounded-2xl text-lg ${
                                         isActive 
-                                        ? "bg-[#a8e03e] text-black font-bold" 
+                                        ? "bg-[#00875a] text-white font-bold" 
                                         : "text-gray-400"
                                     }`}
                                 >

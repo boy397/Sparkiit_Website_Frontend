@@ -57,7 +57,7 @@ function MentorsContent({ mentors }: { mentors: Mentor[] }) {
     return (
         <section 
             ref={containerRef}
-            className="relative h-[320px] w-full bg-[#a8e03e] overflow-hidden flex flex-col items-center justify-center"
+            className="relative h-[320px] w-full bg-[#00875a] overflow-hidden flex flex-col items-center justify-center"
         >
             {/* Horizontal Sliding Mentors */}
             <div className="absolute inset-0 flex items-center overflow-hidden opacity-40">
@@ -118,7 +118,7 @@ export default function MentorsSection() {
 
     if (!mounted) {
         return (
-            <section className="h-[320px] flex flex-col items-center justify-center bg-[#a8e03e] text-black text-center">
+            <section className="h-[320px] flex flex-col items-center justify-center bg-[#00875a] text-white text-center">
                 <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold uppercase tracking-tighter">Let&apos;s Build.</h2>
                 <p className="mt-2 text-sm font-medium uppercase tracking-widest opacity-80">Ready to transform education?</p>
             </section>

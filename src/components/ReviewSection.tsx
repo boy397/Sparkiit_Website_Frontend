@@ -30,14 +30,14 @@ export default function ReviewSection() {
                         <Star 
                             key={i}
                             size={32}
-                            fill={i < fullStars ? "#a8e03e" : "transparent"}
-                            color={i < fullStars ? "#a8e03e" : "rgba(255,255,255,0.1)"}
-                            className={i < fullStars ? "drop-shadow-[0_0_10px_rgba(168,224,62,0.5)]" : ""}
+                            fill={i < fullStars ? "#00875a" : "transparent"}
+                            color={i < fullStars ? "#00875a" : "rgba(255,255,255,0.1)"}
+                            className={i < fullStars ? "drop-shadow-[0_0_10px_rgba(0,135,90,0.5)]" : ""}
                         />
                     ))}
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-widest text-white">
-                    Trusted by <span className="text-[#a8e03e]">10,000+</span> Students
+                    Trusted by <span className="text-[#00875a]">10,000+</span> Students
                 </h3>
                 <p className="text-white/40 mt-2 text-sm md:text-base uppercase tracking-widest font-medium">
                     Excellent {finalRating.toFixed(1)}/5.0 Rating based on verified reviews

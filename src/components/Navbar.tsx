@@ -58,7 +58,7 @@ export default function Navbar() {
             {/* Left Side: Logo and Links */}
             <div className="flex items-center gap-10">
                 <div className="flex items-center gap-2">
-                    <div className="bg-[#a8e03e] text-black w-8 h-8 flex items-center justify-center rounded-sm">
+                    <div className="bg-[#00875a] text-white w-8 h-8 flex items-center justify-center rounded-sm">
                         <Plus size={20} className="font-bold border-2 border-black rounded-sm" />
                     </div>
                     <Link href="/" className="text-xl font-bold tracking-widest uppercase text-white">
@@ -67,7 +67,7 @@ export default function Navbar() {
                 </div>
 
                 <div className="hidden xl:flex items-center gap-8">
-                    <Link href="/" className="text-sm font-medium text-[#a8e03e] transition-colors">
+                    <Link href="/" className="text-sm font-medium text-[#00875a] transition-colors">
                         Home
                     </Link>
                     <Link href="/domains" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
@@ -93,11 +93,11 @@ export default function Navbar() {
 
                         {/* More Dropdown */}
                         <div className="absolute top-full left-0 mt-2 w-48 bg-[#050505] border border-white/10 rounded-xl py-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 backdrop-blur-xl shadow-2xl">
-                            <Link href="/projects" className="block px-6 py-2 text-sm text-white/60 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Projects</Link>
-                            <Link href="/blog" className="block px-6 py-2 text-sm text-white/60 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Blogs</Link>
-                            <Link href="/verify" className="block px-6 py-2 text-sm text-white/60 hover:text-[#a8e03e] transition-colors uppercase tracking-widest font-bold">Verify Certificate</Link>
+                            <Link href="/projects" className="block px-6 py-2 text-sm text-white/60 hover:text-[#00875a] transition-colors uppercase tracking-widest font-bold">Projects</Link>
+                            <Link href="/blog" className="block px-6 py-2 text-sm text-white/60 hover:text-[#00875a] transition-colors uppercase tracking-widest font-bold">Blogs</Link>
+                            <Link href="/verify" className="block px-6 py-2 text-sm text-white/60 hover:text-[#00875a] transition-colors uppercase tracking-widest font-bold">Verify Certificate</Link>
                             <div className="h-px bg-white/5 my-2" />
-                            <Link href="/events" className="block px-6 py-2 text-sm text-[#a8e03e] hover:text-[#bef251] transition-colors uppercase tracking-widest font-black">Events</Link>
+                            <Link href="/events" className="block px-6 py-2 text-sm text-[#00875a] hover:text-[#00c978] transition-colors uppercase tracking-widest font-black">Events</Link>
                         </div>
                     </div>
                 </div>
@@ -106,9 +106,9 @@ export default function Navbar() {
             {/* Right Side: Search and User Actions */}
             <div className="flex items-center gap-4 md:gap-6">
                 {/* Search Bar Container */}
-                <div className="hidden lg:flex items-center bg-white/5 border border-white/10 rounded-full h-11 pl-4 pr-1 focus-within:border-[#a8e03e]/40 transition-all duration-300">
+                <div className="hidden lg:flex items-center bg-white/5 border border-white/10 rounded-full h-11 pl-4 pr-1 focus-within:border-[#00875a]/40 transition-all duration-300">
                     <div className="flex items-center gap-2 cursor-pointer group pr-3 border-r border-white/5">
-                        <LayoutGrid size={16} className="text-[#a8e03e]" />
+                        <LayoutGrid size={16} className="text-[#00875a]" />
                         <span className="text-xs font-semibold text-white/60 whitespace-nowrap">Categories</span>
                         <ChevronDown size={12} className="text-white/20" />
                     </div>
@@ -121,7 +121,7 @@ export default function Navbar() {
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
 
-                    <button className="bg-[#a8e03e] hover:bg-[#96c937] text-black w-9 h-9 rounded-full transition-transform hover:scale-105 active:scale-95 flex items-center justify-center shrink-0">
+                    <button className="bg-[#00875a] hover:bg-[#00a86b] text-white w-9 h-9 rounded-full transition-transform hover:scale-105 active:scale-95 flex items-center justify-center shrink-0">
                         <Search size={16} />
                     </button>
                 </div>
@@ -130,7 +130,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-2">
                     <div className="relative p-2 rounded-full hover:bg-white/5 cursor-pointer transition-colors group">
                         <ShoppingBasket size={22} className="text-white/60 group-hover:text-white transition-colors" />
-                        <span className="absolute top-1 right-1 bg-[#a8e03e] text-black text-[10px] font-black w-4 h-4 flex items-center justify-center rounded-full">
+                        <span className="absolute top-1 right-1 bg-[#00875a] text-white text-[10px] font-black w-4 h-4 flex items-center justify-center rounded-full">
                             0
                         </span>
                     </div>
@@ -151,7 +151,7 @@ export default function Navbar() {
                                         <p className="text-xs font-bold text-white/30 uppercase tracking-widest mb-1">Logged in as</p>
                                         <p className="text-sm font-bold text-white truncate">{user.name}</p>
                                     </div>
-                                    <Link href="/dashboard" className="flex items-center gap-3 px-6 py-2.5 text-sm text-white/60 hover:text-[#a8e03e] hover:bg-white/5 transition-all">
+                                    <Link href="/dashboard" className="flex items-center gap-3 px-6 py-2.5 text-sm text-white/60 hover:text-[#00875a] hover:bg-white/5 transition-all">
                                         <LayoutGrid size={18} />
                                         <span>Student Dashboard</span>
                                     </Link>
@@ -165,7 +165,7 @@ export default function Navbar() {
                                 </>
                             ) : (
                                 <div className="px-4 py-2 space-y-2">
-                                    <Link href="/login" className="block w-full text-center bg-[#a8e03e] text-black font-bold py-2.5 rounded-xl hover:bg-[#96c937] transition-all">
+                                    <Link href="/login" className="block w-full text-center bg-[#00875a] text-white font-bold py-2.5 rounded-xl hover:bg-[#00a86b] transition-all">
                                         Login
                                     </Link>
                                     <Link href="/signup" className="block w-full text-center bg-white/5 text-white/60 font-medium py-2.5 rounded-xl border border-white/10 hover:text-white hover:border-white/20 transition-all">
@@ -201,7 +201,7 @@ export default function Navbar() {
                             <Link 
                                 href="/" 
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="text-2xl font-black uppercase tracking-widest text-[#a8e03e]"
+                                className="text-2xl font-black uppercase tracking-widest text-[#00875a]"
                             >
                                 Home
                             </Link>
@@ -229,17 +229,17 @@ export default function Navbar() {
                             
                             <div className="h-px bg-white/5 my-4" />
                             
-                            <Link href="/projects" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-white/40 hover:text-[#a8e03e] uppercase">Projects</Link>
-                            <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-white/40 hover:text-[#a8e03e] uppercase">Blogs</Link>
-                            <Link href="/verify" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-white/40 hover:text-[#a8e03e] uppercase">Verify Certificate</Link>
+                            <Link href="/projects" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-white/40 hover:text-[#00875a] uppercase">Projects</Link>
+                            <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-white/40 hover:text-[#00875a] uppercase">Blogs</Link>
+                            <Link href="/verify" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-white/40 hover:text-[#00875a] uppercase">Verify Certificate</Link>
                             
                             <div className="h-px bg-white/5 my-4" />
 
                             {user ? (
                                 <div className="space-y-4">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 bg-[#a8e03e]/10 rounded-full flex items-center justify-center">
-                                            <User size={20} className="text-[#a8e03e]" />
+                                        <div className="w-10 h-10 bg-[#00875a]/10 rounded-full flex items-center justify-center">
+                                            <User size={20} className="text-[#00875a]" />
                                         </div>
                                         <div>
                                             <p className="text-white font-bold">{user.name}</p>
@@ -249,7 +249,7 @@ export default function Navbar() {
                                     <Link 
                                         href="/dashboard" 
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className="flex items-center gap-3 text-white/70 hover:text-[#a8e03e]"
+                                        className="flex items-center gap-3 text-white/70 hover:text-[#00875a]"
                                     >
                                         <LayoutGrid size={20} />
                                         <span>Student Dashboard</span>
@@ -267,7 +267,7 @@ export default function Navbar() {
                                     <Link 
                                         href="/login" 
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className="bg-[#a8e03e] text-black font-black py-4 rounded-2xl text-center"
+                                        className="bg-[#00875a] text-white font-black py-4 rounded-2xl text-center"
                                     >
                                         LOGIN
                                     </Link>

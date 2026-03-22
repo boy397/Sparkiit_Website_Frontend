@@ -12,7 +12,7 @@ interface PremiumButtonProps {
 export default function PremiumButton({ text, onClick, className = "", variant = "primary" }: PremiumButtonProps) {
     const baseStyles = "relative px-8 py-4 rounded-full font-bold uppercase text-sm overflow-hidden transition-all duration-300 group";
     const variants = {
-        primary: "bg-[#a8e03e] text-black hover:scale-105 active:scale-95",
+        primary: "bg-[#00875a] text-white hover:scale-105 active:scale-95",
         secondary: "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:scale-105 active:scale-95",
     };
 

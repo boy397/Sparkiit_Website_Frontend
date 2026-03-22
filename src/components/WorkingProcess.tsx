@@ -53,7 +53,7 @@ export default function WorkingProcess() {
                                 {line.split(' ').map((word: string, j: number) => (
                                     <motion.span
                                         key={j}
-                                        whileHover={{ scale: 1.05, color: "#a8e03e" }}
+                                        whileHover={{ scale: 1.05, color: "#00875a" }}
                                         transition={{ type: "spring", stiffness: 300, damping: 15 }}
                                         // inline-block is required for scale transforms to work on text
                                         className="inline-block mr-3 md:mr-4 last:mr-0 origin-left"
@@ -80,7 +80,7 @@ export default function WorkingProcess() {
                             transition={{ duration: 0.6, delay: index * 0.1 }}
                             className="group relative"
                         >
-                            <span className="text-8xl font-black absolute -top-10 -left-6 transition-all duration-700 select-none text-transparent group-hover:text-[#a8e03e]/10" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.15)" }}>
+                            <span className="text-8xl font-black absolute -top-10 -left-6 transition-all duration-700 select-none text-transparent group-hover:text-[#00875a]/10" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.15)" }}>
                                 {step.num}
                             </span>
                             <div className="relative z-10 pt-10">

@@ -59,9 +59,9 @@ export default function RoadmapSection() {
             {/* Title */}
             <div className="max-w-7xl mx-auto px-6 md:px-16 mb-10 relative z-10">
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                    <span className="text-[#a8e03e] text-[11px] font-black uppercase tracking-[0.4em] block mb-3"></span>
+                    <span className="text-[#00875a] text-[11px] font-black uppercase tracking-[0.4em] block mb-3"></span>
                     <h2 className="text-3xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
-                        Victory <span className="text-[#a8e03e]">Blue Print</span>
+                        Victory <span className="text-[#00875a]">Blue Print</span>
                     </h2>
                 </motion.div>
             </div>
@@ -87,10 +87,10 @@ export default function RoadmapSection() {
                     </defs>
 
                     {/* Full background path (dim) */}
-                    <path d={pathD} stroke="rgba(168,224,62,0.08)" strokeWidth="6" strokeLinecap="round" fill="none" />
+                    <path d={pathD} stroke="rgba(0,135,90,0.08)" strokeWidth="6" strokeLinecap="round" fill="none" />
 
                     {/* Main visible path */}
-                    <path d={pathD} stroke="#a8e03e" strokeWidth="4" strokeLinecap="round" fill="none" filter="url(#glow)" opacity="0.7" />
+                    <path d={pathD} stroke="#00875a" strokeWidth="4" strokeLinecap="round" fill="none" filter="url(#glow)" opacity="0.7" />
 
                     {/* Flowing particle that travels along the path continuously */}
                     <motion.circle
@@ -112,14 +112,14 @@ export default function RoadmapSection() {
                                     <>
                                         <motion.circle
                                             cx={n.x} cy={n.y} r="22"
-                                            fill="none" stroke="#a8e03e"
+                                            fill="none" stroke="#00875a"
                                             initial={{ r: 14, opacity: 1 }}
                                             animate={{ r: 28, opacity: 0 }}
                                             transition={{ duration: 1.2, repeat: Infinity }}
                                         />
                                         <motion.circle
                                             cx={n.x} cy={n.y} r="22"
-                                            fill="none" stroke="#a8e03e"
+                                            fill="none" stroke="#00875a"
                                             initial={{ r: 14, opacity: 0.8 }}
                                             animate={{ r: 34, opacity: 0 }}
                                             transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
@@ -131,7 +131,7 @@ export default function RoadmapSection() {
                                 <motion.circle
                                     cx={n.x} cy={n.y}
                                     r={isActive ? 18 : 14}
-                                    fill={isActive ? "rgba(168,224,62,0.25)" : isPast ? "rgba(168,224,62,0.1)" : "rgba(168,224,62,0.05)"}
+                                    fill={isActive ? "rgba(0,135,90,0.25)" : isPast ? "rgba(0,135,90,0.1)" : "rgba(0,135,90,0.05)"}
                                     animate={{ r: isActive ? 18 : 14 }}
                                     transition={{ duration: 0.3 }}
                                 />
@@ -140,11 +140,11 @@ export default function RoadmapSection() {
                                 <motion.circle
                                     cx={n.x} cy={n.y}
                                     r={isActive ? 12 : 9}
-                                    fill={isActive ? "#fff" : isPast ? "#a8e03e" : "rgba(168,224,62,0.4)"}
+                                    fill={isActive ? "#fff" : isPast ? "#00875a" : "rgba(0,135,90,0.4)"}
                                     filter={isActive ? "url(#dotGlow)" : undefined}
                                     animate={{
                                         r: isActive ? 12 : 9,
-                                        fill: isActive ? "#fff" : isPast ? "#a8e03e" : "rgba(168,224,62,0.4)",
+                                        fill: isActive ? "#fff" : isPast ? "#00875a" : "rgba(0,135,90,0.4)",
                                     }}
                                     transition={{ duration: 0.3 }}
                                 />
@@ -174,7 +174,7 @@ export default function RoadmapSection() {
                         >
                             <h4
                                 className="text-[12px] font-extrabold mb-0.5 transition-colors duration-300"
-                                style={{ color: isActive ? "#a8e03e" : "#fff" }}
+                                style={{ color: isActive ? "#00875a" : "#fff" }}
                             >
                                 Step {n.step}:
                             </h4>
@@ -195,7 +195,7 @@ export default function RoadmapSection() {
                             onClick={() => setActiveStep(i)}
                             className="w-8 h-1 rounded-full transition-all duration-300 cursor-pointer"
                             style={{
-                                background: i === activeStep ? "#a8e03e" : "rgba(255,255,255,0.1)",
+                                background: i === activeStep ? "#00875a" : "rgba(255,255,255,0.1)",
                                 transform: i === activeStep ? "scaleY(1.5)" : "scaleY(1)",
                             }}
                         />
@@ -205,7 +205,7 @@ export default function RoadmapSection() {
 
             {/* ——— MOBILE ROADMAP ——— */}
             <div className="lg:hidden px-6 relative mt-8">
-                <div className="absolute left-[30px] top-0 bottom-0 w-[3px] rounded-full bg-gradient-to-b from-[#a8e03e]/10 via-[#a8e03e]/60 to-[#a8e03e]/10" />
+                <div className="absolute left-[30px] top-0 bottom-0 w-[3px] rounded-full bg-gradient-to-b from-[#00875a]/10 via-[#00875a]/60 to-[#00875a]/10" />
                 <div className="space-y-10 pl-14">
                     {nodes.map((n, i) => {
                         const isActive = i === activeStep;
@@ -213,11 +213,11 @@ export default function RoadmapSection() {
                             <div key={n.step} className="relative">
                                 <motion.div
                                     className="absolute -left-[46px] top-0 w-6 h-6 rounded-full border-4 border-[#050505] transition-all duration-300"
-                                    style={{ background: isActive ? "#fff" : "#a8e03e", boxShadow: isActive ? "0 0 20px #a8e03e" : "none" }}
+                                    style={{ background: isActive ? "#fff" : "#00875a", boxShadow: isActive ? "0 0 20px #00875a" : "none" }}
                                     animate={{ scale: isActive ? 1.3 : 1 }}
                                 />
                                 <h4 className="text-[11px] font-extrabold uppercase tracking-wider mb-1 transition-colors duration-300"
-                                    style={{ color: isActive ? "#a8e03e" : "rgba(168,224,62,0.5)" }}>
+                                    style={{ color: isActive ? "#00875a" : "rgba(0,135,90,0.5)" }}>
                                     Step {n.step}:
                                 </h4>
                                 <p className="text-xs font-semibold leading-snug transition-colors duration-300"
@@ -231,8 +231,8 @@ export default function RoadmapSection() {
             </div>
 
             {/* BG decorative */}
-            <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#a8e03e]/5 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#a8e03e]/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#00875a]/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#00875a]/5 rounded-full blur-[100px] pointer-events-none" />
         </section>
     );
 }
