@@ -26,6 +26,7 @@ const AVAILABLE_SECTIONS = [
     { key: "WITHDRAW_PAYMENTS", label: "Withdraw Payments" },
     { key: "LOCATIONS", label: "Locations" },
     { key: "CMS_USER", label: "CMS User (Admin Management)" },
+    { key: "ATTENDANCE_LOGS", label: "Attendance Logs" },
     { key: "MANAGE_COURSES", label: "Manage Courses" },
     { key: "MANAGE_BLOGS", label: "Manage Blogs" },
     { key: "MANAGE_SERVICES", label: "Manage Services" },

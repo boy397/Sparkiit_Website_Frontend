@@ -63,6 +63,7 @@ const navGroups: NavGroup[] = [
         title: "CMS DASHBOARD MANAGEMENT",
         items: [
             { label: "CMS USER", href: "/admin/users", icon: <Settings size={20} strokeWidth={1.8} />, permissionKey: "CMS_USER" },
+            { label: "ATTENDANCE LOGS", href: "/admin/attendance", icon: <Calendar size={20} strokeWidth={1.8} />, permissionKey: "ATTENDANCE_LOGS", role: "SUPER_ADMIN" },
         ]
     },
     {
