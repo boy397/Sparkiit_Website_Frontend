@@ -44,6 +44,7 @@ const navGroups: NavGroup[] = [
         items: [
             { label: "USERS MANAGEMENT", href: "/admin/candidates", icon: <Users size={20} strokeWidth={1.8} />, permissionKey: "STUDENT_USERS_MANAGEMENT" },
             { label: "MANAGE PROJECTS", href: "/admin/projects", icon: <Briefcase size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_PROJECTS" },
+            { label: "MANAGE COURSES", href: "/admin/courses", icon: <GraduationCap size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_COURSES" },
             { label: "CERTIFICATE BUILDER", 
                 icon: <Settings2 size={20} strokeWidth={1.8} />,
                 permissionKey: "CERTIFICATE_BUILDER",
@@ -53,45 +54,35 @@ const navGroups: NavGroup[] = [
                 ]
             },
             { label: "CERTIFICATE MANAGEMENT", href: "/admin/certificates", icon: <Award size={20} strokeWidth={1.8} />, permissionKey: "CERTIFICATE_MANAGEMENT" },
-            { label: "BADGES", href: "/admin/badges", icon: <Badge size={20} strokeWidth={1.8} />, permissionKey: "BADGES" },
             { label: "MANAGE ORDERS", href: "/admin/orders", icon: <ShoppingBag size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_ORDERS" },
-            { label: "MANAGE COUPONS", href: "/admin/coupons", icon: <Ticket size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_COUPONS" },
-            { label: "WITHDRAW PAYMENTS", href: "/admin/withdrawals", icon: <HandCoins size={20} strokeWidth={1.8} />, permissionKey: "WITHDRAW_PAYMENTS" },
-            { label: "LOCATIONS", href: "/admin/locations", icon: <MapPin size={20} strokeWidth={1.8} />, permissionKey: "LOCATIONS" },
         ]
     },
+
     {
-        title: "CMS DASHBOARD MANAGEMENT",
+        title: "WEBSITE MANAGEMENT",
         items: [
-            { label: "CMS USER", href: "/admin/users", icon: <Settings size={20} strokeWidth={1.8} />, permissionKey: "CMS_USER" },
-            { label: "ATTENDANCE LOGS", href: "/admin/attendance", icon: <Calendar size={20} strokeWidth={1.8} />, permissionKey: "ATTENDANCE_LOGS", role: "SUPER_ADMIN" },
-        ]
-    },
-    {
-        title: "WEBSITE & CONFIGURATION",
-        items: [
-            { label: "MANAGE COURSES", href: "/admin/courses", icon: <GraduationCap size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_COURSES" },
-            { label: "MANAGE BLOGS", href: "/admin/blogs", icon: <FileText size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_BLOGS" },
-            { label: "MANAGE SERVICES", href: "/admin/services", icon: <Workflow size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_SERVICES" },
-            { label: "SECTIONS", href: "/admin/sections", icon: <Blocks size={20} strokeWidth={1.8} />, permissionKey: "SECTIONS" },
-            { label: "BRANDS", href: "/admin/brands", icon: <Copyright size={20} strokeWidth={1.8} />, permissionKey: "BRANDS" },
-            { label: "MANAGE MENTORS", href: "/admin/mentors", icon: <Users size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_MENTORS" },
-            { label: "MANAGE EVENTS", href: "/admin/events", icon: <Calendar size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_EVENTS" },
-            { label: "FOOTER SETTINGS", href: "/admin/footer-settings", icon: <PanelBottom size={20} strokeWidth={1.8} />, permissionKey: "FOOTER_SETTINGS" },
             { label: "MENU BUILDER", href: "/admin/menu-builder", icon: <LayoutGrid size={20} strokeWidth={1.8} />, permissionKey: "MENU_BUILDER" },
             { label: "PAGE BUILDER", href: "/admin/page-builder", icon: <FilePlus size={20} strokeWidth={1.8} />, permissionKey: "PAGE_BUILDER" },
-            { label: "SOCIAL LINKS", href: "/admin/social-links", icon: <Hash size={20} strokeWidth={1.8} />, permissionKey: "SOCIAL_LINKS" },
+            { label: "SECTIONS", href: "/admin/sections", icon: <Blocks size={20} strokeWidth={1.8} />, permissionKey: "SECTIONS" },
+            { label: "BRANDS", href: "/admin/brands", icon: <Copyright size={20} strokeWidth={1.8} />, permissionKey: "BRANDS" },
+            { label: "MANAGE SERVICES", href: "/admin/services", icon: <Workflow size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_SERVICES" },
+            { label: "MANAGE BLOGS", href: "/admin/blogs", icon: <FileText size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_BLOGS" },
+            { label: "MANAGE MENTORS", href: "/admin/mentors", icon: <Users size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_MENTORS" },
+            { label: "MANAGE EVENTS", href: "/admin/events", icon: <Calendar size={20} strokeWidth={1.8} />, permissionKey: "MANAGE_EVENTS" },
             { label: "FAQS", href: "/admin/faqs", icon: <HelpCircle size={20} strokeWidth={1.8} />, permissionKey: "FAQS" },
         ]
     },
     {
-        title: "SETTINGS",
+        title: "CMS MANAGEMENT",
         items: [
+            { label: "CMS USER", href: "/admin/users", icon: <Settings size={20} strokeWidth={1.8} />, permissionKey: "CMS_USER" },
+            { label: "ATTENDANCE LOGS", href: "/admin/attendance", icon: <Calendar size={20} strokeWidth={1.8} />, permissionKey: "ATTENDANCE_LOGS", role: "SUPER_ADMIN" },
             { label: "SETTINGS", href: "/admin/settings", icon: <Settings size={20} strokeWidth={1.8} />, permissionKey: "SETTINGS" },
             { label: "LOGOUT", href: "#", icon: <LogOut size={20} strokeWidth={1.8} />, onClick: () => {} },
         ]
     }
 ];
+
 
 function NavItemComponent({ item, sidebarOpen, pathname, user, onClick }: { item: any, sidebarOpen: boolean, pathname: string, user: any, onClick?: () => void }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -346,8 +337,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         }
     }
 
-    // Update logout item in navGroups
-    navGroups[4].items[1].onClick = handleLogout;
+    // Update logout item in navGroups (Group 3, Item 3)
+    navGroups[3].items[3].onClick = handleLogout;
 
     return (
         <div style={{ display: "flex", minHeight: "100dvh", background: "#0a0a0a", color: "#e5e5e5", fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif", overflowX: "hidden" }}>

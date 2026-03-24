@@ -9,10 +9,12 @@ import {
     PlusCircle, Badge, Settings2, Workflow,
     MapPin, Blocks, Copyright, PanelBottom,
     LayoutGrid, FilePlus, Hash, HelpCircle,
-    HandCoins, Settings, Calendar
+    HandCoins, Settings, Calendar, Home, Layout,
+    Share2, Search, Shield, Camera
 } from "lucide-react";
 
 function ActionSection({ title, actions, cardStyle }: any) {
+    if (!actions.length) return null;
     return (
         <div style={{ marginBottom: 48 }}>
             <h2 style={{ fontSize: 13, fontWeight: 800, color: "rgba(255, 255, 255, 0.3)", marginBottom: 20, textTransform: "uppercase", letterSpacing: "0.15em" }}>
@@ -72,7 +74,6 @@ function ActionSection({ title, actions, cardStyle }: any) {
 
 const API_BASE = API_BASE_URL + "/api/admin";
 
-
 interface StatsData {
     totalCourses: number;
     activeCourses: number;
@@ -125,33 +126,33 @@ export default function AdminDashboard() {
     const studentActions = [
         { title: "USERS MANAGEMENT", desc: "Students & Metrics", icon: Users, link: "/admin/candidates", color: "#818cf8" },
         { title: "MANAGE PROJECTS", desc: "Assignments & Submissions", icon: Briefcase, link: "/admin/projects", color: "#c084fc" },
-        { title: "CERTIFICATES", desc: "Issue & Track", icon: Award, link: "/admin/certificates", color: "#f472b6" },
+        { title: "MANAGE COURSES", desc: "Curriculum & Lessons", icon: BookOpen, link: "/admin/courses", color: "#00875a" },
         { title: "CERT BUILDER", desc: "Design Templates", icon: Settings2, link: "/admin/certificate-builder/internship", color: "#f87171" },
-        { title: "BADGES", desc: "Student Rewards", icon: Badge, link: "/admin/badges", color: "#fbbf24" },
+        { title: "CERTIFICATES", desc: "Issue & Track", icon: Award, link: "/admin/certificates", color: "#f472b6" },
         { title: "MANAGE ORDERS", desc: "Sales & Payments", icon: ShoppingCart, link: "/admin/orders", color: "#fb923c" },
-        { title: "COUPONS", desc: "Discounts & Promos", icon: Ticket, link: "/admin/coupons", color: "#f59e0b" },
-        { title: "WITHDRAWALS", desc: "Payment Processing", icon: HandCoins, link: "/admin/withdrawals", color: "#10b981" },
-        { title: "LOCATIONS", desc: "Branch Management", icon: MapPin, link: "/admin/locations", color: "#6366f1" },
-    ];
-    
-    const cmsActions = [
-        { title: "CMS USER", desc: "Admin & Staff Roles", icon: Settings, link: "/admin/users", color: "#00875a" },
     ];
 
+    
     const websiteActions = [
-        { title: "MANAGE COURSES", desc: "Curriculum & Lessons", icon: BookOpen, link: "/admin/courses", color: "#00875a" },
-        { title: "MANAGE BLOGS", desc: "Articles & News", icon: FileText, link: "/admin/blogs", color: "#5eead4" },
-        { title: "MANAGE SERVICES", desc: "Platform Config", icon: Monitor, link: "/admin/services", color: "#60a5fa" },
-        { title: "SECTIONS", desc: "Home Page Layout", icon: Blocks, link: "/admin/sections", color: "#ec4899" },
-        { title: "BRANDS", desc: "Partner Logos", icon: Copyright, link: "/admin/brands", color: "#a855f7" },
-        { title: "MANAGE MENTORS", desc: "Slider Profiles", icon: Users, link: "/admin/mentors", color: "#10b981" },
-        { title: "MANAGE EVENTS", desc: "Ongoing/Upcoming/Past", icon: Calendar, link: "/admin/events", color: "#00875a" },
-        { title: "FOOTER", desc: "Bottom Layout", icon: PanelBottom, link: "/admin/footer-settings", color: "#64748b" },
         { title: "MENU BUILDER", desc: "Navigation Links", icon: LayoutGrid, link: "/admin/menu-builder", color: "#06b6d4" },
         { title: "PAGE BUILDER", desc: "Static Pages", icon: FilePlus, link: "/admin/page-builder", color: "#84cc16" },
-        { title: "SOCIAL LINKS", desc: "Profiles & Icons", icon: Hash, link: "/admin/social-links", color: "#f43f5e" },
+        { title: "SECTIONS", desc: "Home Page Layout", icon: Blocks, link: "/admin/sections", color: "#ec4899" },
+        { title: "BRANDS", desc: "Partner Logos", icon: Copyright, link: "/admin/brands", color: "#a855f7" },
+        { title: "MANAGE SERVICES", desc: "Platform Config", icon: Monitor, link: "/admin/services", color: "#60a5fa" },
+        { title: "MANAGE BLOGS", desc: "Articles & News", icon: FileText, link: "/admin/blogs", color: "#5eead4" },
+        { title: "MANAGE MENTORS", desc: "Slider Profiles", icon: Users, link: "/admin/mentors", color: "#10b981" },
+        { title: "MANAGE EVENTS", desc: "Ongoing/Upcoming/Past", icon: Calendar, link: "/admin/events", color: "#00875a" },
         { title: "FAQs", desc: "Help Center", icon: HelpCircle, link: "/admin/faqs", color: "#3b82f6" },
-        { title: "SETTINGS", desc: "Global Config", icon: Settings, link: "/admin/settings", color: "#94a3b8" },
+        { title: "GENERAL SETTINGS", desc: "Global Configuration", icon: Settings, link: "/admin/settings/general", color: "#00875a" },
+        { title: "HOME CONTENT", desc: "Edit Home Page Sections", icon: Home, link: "/admin/settings/home", color: "#00875a" },
+        { title: "FOOTER", desc: "Footer Links & Content", icon: Layout, link: "/admin/settings/footer", color: "#00875a" },
+        { title: "SOCIAL LINKS", desc: "Social Media Profiles", icon: Share2, link: "/admin/settings/social", color: "#00875a" },
+        { title: "SEO & META", desc: "Search Engine Optimization", icon: Search, link: "/admin/settings/seo", color: "#00875a" },
+    ];
+
+    const cmsActions = [
+        { title: "ADMINS", desc: "Admin & Staff Roles", icon: Shield, link: "/admin/admins", color: "#00875a" },
+        { title: "ATTENDANCE", desc: "Photo & Time tracking", icon: Camera, link: "/admin/attendance", color: "#00875a" },
     ];
 
     if (loading) {
@@ -178,8 +179,8 @@ export default function AdminDashboard() {
 
             {/* Dashboard Sections */}
             <ActionSection title="STUDENT DASHBOARD MANAGEMENT" actions={studentActions} cardStyle={cardStyle} />
-            <ActionSection title="CMS DASHBOARD MANAGEMENT" actions={cmsActions} cardStyle={cardStyle} />
-            <ActionSection title="WEBSITE & CONFIGURATION" actions={websiteActions} cardStyle={cardStyle} />
+            <ActionSection title="WEBSITE MANAGEMENT" actions={websiteActions} cardStyle={cardStyle} />
+            <ActionSection title="CMS MANAGEMENT" actions={cmsActions} cardStyle={cardStyle} />
 
             <h2 style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 24, marginTop: 12, textTransform: "uppercase", letterSpacing: "0.05em", display: "flex", alignItems: "center", gap: 10 }}>
                 <LayoutDashboard size={20} color="#00875a" /> Overview Analytics
