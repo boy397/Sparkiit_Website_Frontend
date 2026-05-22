@@ -1,5 +1,6 @@
 "use client";
 import { API_BASE_URL } from "@/lib/api-config";
+const SUPER_ADMIN_EMAIL = "sunirmal147@gmail.com";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
@@ -82,12 +83,16 @@ interface StatsData {
     recentCourses: { _id: string; title: string; status: string; createdAt: string }[];
     recentCandidates: { _id: string; name: string; email: string; status: string; createdAt: string }[];
 }
-
 export default function AdminDashboard() {
     const [stats, setStats] = useState<StatsData | null>(null);
     const [loading, setLoading] = useState(true);
+    const [currentUser, setCurrentUser] = useState<any>(null);
+    const isSuperAdmin = currentUser?.role === 'SUPER_ADMIN' && currentUser?.email === SUPER_ADMIN_EMAIL;
 
     useEffect(() => {
+        const stored = localStorage.getItem("adminUser");
+        if (stored) setCurrentUser(JSON.parse(stored));
+
         const token = localStorage.getItem("adminToken");
         fetch(`${API_BASE}/stats`, {
             headers: { "Authorization": `Bearer ${token}` },
@@ -97,6 +102,14 @@ export default function AdminDashboard() {
             .then((d) => { setStats(d.data); setLoading(false); })
             .catch(() => setLoading(false));
     }, []);
+
+    const filterActions = (actions: any[]) => {
+        return actions.filter(action => {
+            if (isSuperAdmin) return true;
+            if (!action.permissionKey) return true;
+            return currentUser?.allowedSections?.includes(action.permissionKey);
+        });
+    };
 
     const cardStyle: React.CSSProperties = {
         background: "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)",
@@ -124,36 +137,36 @@ export default function AdminDashboard() {
     };
 
     const studentActions = [
-        { title: "USERS MANAGEMENT", desc: "Students & Metrics", icon: Users, link: "/admin/candidates", color: "#818cf8" },
-        { title: "MANAGE PROJECTS", desc: "Assignments & Submissions", icon: Briefcase, link: "/admin/projects", color: "#c084fc" },
-        { title: "STUDENT ENROLLMENTS", desc: "Manage Student Courses", icon: GraduationCap, link: "/admin/candidates", color: "#00875a" },
-        { title: "CERT BUILDER", desc: "Design Templates", icon: Settings2, link: "/admin/certificate-builder/internship", color: "#f87171" },
-        { title: "CERTIFICATES", desc: "Issue & Track", icon: Award, link: "/admin/certificates", color: "#f472b6" },
-        { title: "MANAGE ORDERS", desc: "Sales & Payments", icon: ShoppingCart, link: "/admin/orders", color: "#fb923c" },
+        { title: "USERS MANAGEMENT", desc: "Students & Metrics", icon: Users, link: "/admin/candidates", color: "#818cf8", permissionKey: "STUDENT_USERS_MANAGEMENT" },
+        { title: "MANAGE PROJECTS", desc: "Assignments & Submissions", icon: Briefcase, link: "/admin/projects", color: "#c084fc", permissionKey: "MANAGE_PROJECTS" },
+        { title: "STUDENT ENROLLMENTS", desc: "Manage Student Courses", icon: GraduationCap, link: "/admin/candidates", color: "#00875a", permissionKey: "STUDENT_USERS_MANAGEMENT" },
+        { title: "CERT BUILDER", desc: "Design Templates", icon: Settings2, link: "/admin/certificate-builder/internship", color: "#f87171", permissionKey: "CERTIFICATE_BUILDER" },
+        { title: "CERTIFICATES", desc: "Issue & Track", icon: Award, link: "/admin/certificates", color: "#f472b6", permissionKey: "CERTIFICATE_MANAGEMENT" },
+        { title: "MANAGE ORDERS", desc: "Sales & Payments", icon: ShoppingCart, link: "/admin/orders", color: "#fb923c", permissionKey: "MANAGE_ORDERS" },
     ];
 
     
     const websiteActions = [
-        { title: "PAGE BUILDER", desc: "Static Pages", icon: FilePlus, link: "/admin/page-builder", color: "#84cc16" },
-        { title: "RATING SECTION", desc: "Home Page Layout", icon: Blocks, link: "/admin/sections", color: "#ec4899" },
-        { title: "ENROLLMENT LINKS", desc: "Global Sign Up Flows", icon: Calendar, link: "/admin/settings/enroll", color: "#f43f5e" },
-        { title: "COLLABORATOR LOGO", desc: "Partner Logos", icon: Copyright, link: "/admin/brands", color: "#a855f7" },
-        { title: "COURSE CATALOG", desc: "Curriculum & Lessons", icon: BookOpen, link: "/admin/courses", color: "#00875a" },
-        { title: "MANAGE DOMAINS", desc: "Platform Config", icon: Monitor, link: "/admin/services", color: "#60a5fa" },
-        { title: "MANAGE BLOGS", desc: "Articles & News", icon: FileText, link: "/admin/blogs", color: "#5eead4" },
-        { title: "MANAGE MENTORS", desc: "Slider Profiles", icon: Users, link: "/admin/mentors", color: "#10b981" },
-        { title: "MANAGE EVENTS", desc: "Ongoing/Upcoming/Past", icon: Calendar, link: "/admin/events", color: "#00875a" },
-        { title: "FAQs", desc: "Help Center", icon: HelpCircle, link: "/admin/faqs", color: "#3b82f6" },
-        { title: "GENERAL SETTINGS", desc: "Global Configuration", icon: Settings, link: "/admin/settings/general", color: "#00875a" },
-        { title: "HOME CONTENT", desc: "Edit Home Page Sections", icon: Home, link: "/admin/settings/home", color: "#00875a" },
-        { title: "FOOTER", desc: "Footer Links & Content", icon: Layout, link: "/admin/settings/footer", color: "#00875a" },
-        { title: "SOCIAL LINKS", desc: "Social Media Profiles", icon: Share2, link: "/admin/settings/social", color: "#00875a" },
-        { title: "SEO & META", desc: "Search Engine Optimization", icon: Search, link: "/admin/settings/seo", color: "#00875a" },
+        { title: "PAGE BUILDER", desc: "Static Pages", icon: FilePlus, link: "/admin/page-builder", color: "#84cc16", permissionKey: "PAGE_BUILDER" },
+        { title: "RATING SECTION", desc: "Home Page Layout", icon: Blocks, link: "/admin/sections", color: "#ec4899", permissionKey: "SECTIONS" },
+        { title: "ENROLLMENT LINKS", desc: "Global Sign Up Flows", icon: Calendar, link: "/admin/settings/enroll", color: "#f43f5e", permissionKey: "ENROLLMENT_LINKS" },
+        { title: "COLLABORATOR LOGO", desc: "Partner Logos", icon: Copyright, link: "/admin/brands", color: "#a855f7", permissionKey: "COLLABORATORS" },
+        { title: "COURSE CATALOG", desc: "Curriculum & Lessons", icon: BookOpen, link: "/admin/courses", color: "#00875a", permissionKey: "MANAGE_COURSES" },
+        { title: "MANAGE DOMAINS", desc: "Platform Config", icon: Monitor, link: "/admin/services", color: "#60a5fa", permissionKey: "MANAGE_SERVICES" },
+        { title: "MANAGE BLOGS", desc: "Articles & News", icon: FileText, link: "/admin/blogs", color: "#5eead4", permissionKey: "MANAGE_BLOGS" },
+        { title: "MANAGE MENTORS", desc: "Slider Profiles", icon: Users, link: "/admin/mentors", color: "#10b981", permissionKey: "MANAGE_MENTORS" },
+        { title: "MANAGE EVENTS", desc: "Ongoing/Upcoming/Past", icon: Calendar, link: "/admin/events", color: "#00875a", permissionKey: "MANAGE_EVENTS" },
+        { title: "FAQs", desc: "Help Center", icon: HelpCircle, link: "/admin/faqs", color: "#3b82f6", permissionKey: "FAQS" },
+        { title: "GENERAL SETTINGS", desc: "Global Configuration", icon: Settings, link: "/admin/settings/general", color: "#00875a", permissionKey: "SETTINGS" },
+        { title: "HOME CONTENT", desc: "Edit Home Page Sections", icon: Home, link: "/admin/settings/home", color: "#00875a", permissionKey: "SETTINGS" },
+        { title: "FOOTER", desc: "Footer Links & Content", icon: Layout, link: "/admin/settings/footer", color: "#00875a", permissionKey: "SETTINGS" },
+        { title: "SOCIAL LINKS", desc: "Social Media Profiles", icon: Share2, link: "/admin/settings/social", color: "#00875a", permissionKey: "SETTINGS" },
+        { title: "SEO & META", desc: "Search Engine Optimization", icon: Search, link: "/admin/settings/seo", color: "#00875a", permissionKey: "SETTINGS" },
     ];
 
     const cmsActions = [
-        { title: "ADMINS", desc: "Admin & Staff Roles", icon: Shield, link: "/admin/admins", color: "#00875a" },
-        { title: "ATTENDANCE", desc: "Photo & Time tracking", icon: Camera, link: "/admin/attendance", color: "#00875a" },
+        { title: "ADMINS", desc: "Admin & Staff Roles", icon: Shield, link: "/admin/admins", color: "#00875a", permissionKey: "CMS_USER" },
+        { title: "ATTENDANCE", desc: "Photo & Time tracking", icon: Camera, link: "/admin/attendance", color: "#00875a", permissionKey: "ATTENDANCE_LOGS" },
     ];
 
     if (loading) {
@@ -179,9 +192,9 @@ export default function AdminDashboard() {
             </div>
 
             {/* Dashboard Sections */}
-            <ActionSection title="STUDENT DASHBOARD MANAGEMENT" actions={studentActions} cardStyle={cardStyle} />
-            <ActionSection title="WEBSITE MANAGEMENT" actions={websiteActions} cardStyle={cardStyle} />
-            <ActionSection title="CMS MANAGEMENT" actions={cmsActions} cardStyle={cardStyle} />
+            <ActionSection title="STUDENT DASHBOARD MANAGEMENT" actions={filterActions(studentActions)} cardStyle={cardStyle} />
+            <ActionSection title="WEBSITE MANAGEMENT" actions={filterActions(websiteActions)} cardStyle={cardStyle} />
+            <ActionSection title="CMS MANAGEMENT" actions={filterActions(cmsActions)} cardStyle={cardStyle} />
 
             <h2 style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 24, marginTop: 12, textTransform: "uppercase", letterSpacing: "0.05em", display: "flex", alignItems: "center", gap: 10 }}>
                 <LayoutDashboard size={20} color="#00875a" /> Overview Analytics

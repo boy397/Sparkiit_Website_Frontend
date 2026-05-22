@@ -1,5 +1,6 @@
 "use client";
 import { API_BASE_URL } from "@/lib/api-config";
+const SUPER_ADMIN_EMAIL = "sunirmal147@gmail.com";
 import React, { useState, useEffect, useCallback } from "react";
 import { 
     Users, Target, TrendingUp, Plus, Calendar, DollarSign, 
@@ -108,8 +109,20 @@ export default function ManageTeamPage() {
             });
             const data = await res.json();
             if (data.success) {
-                setAllUsers(data.data);
-                const potentialLeads = data.data.filter((u: any) => ['SUPER_ADMIN', 'ADMIN', 'TEAM_LEADER', 'MANAGER'].includes(u.role));
+                // Hide superadmin from everyone else in all lists
+                const currentAdmin = JSON.parse(localStorage.getItem("adminUser") || "{}");
+                const isActuallySuperAdmin = currentAdmin?.role === 'SUPER_ADMIN' && currentAdmin?.email === SUPER_ADMIN_EMAIL;
+                
+                const filteredData = data.data.filter((u: any) => {
+                    if (u.role === 'SUPER_ADMIN') {
+                        if (u.email !== SUPER_ADMIN_EMAIL) return false;
+                        return isActuallySuperAdmin;
+                    }
+                    return true;
+                });
+
+                setAllUsers(filteredData);
+                const potentialLeads = filteredData.filter((u: any) => ['SUPER_ADMIN', 'ADMIN', 'TEAM_LEADER', 'MANAGER'].includes(u.role));
                 setLeads(potentialLeads);
             }
         } catch (err) {}
@@ -153,7 +166,8 @@ export default function ManageTeamPage() {
         if (stored) {
             const user = JSON.parse(stored);
             setCurrentUser(user);
-            if (user.role === 'SUPER_ADMIN' && !viewingAsLeadId) {
+            const isActuallySuperAdmin = user.role === 'SUPER_ADMIN' && user.email === SUPER_ADMIN_EMAIL;
+            if (isActuallySuperAdmin && !viewingAsLeadId) {
                 setViewingAsLeadId(user._id);
             }
         }
@@ -359,9 +373,9 @@ export default function ManageTeamPage() {
                     </h1>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 6 }}>
                         <p style={{ color: "rgba(255,255,255,0.3)", fontSize: 11, textTransform: "uppercase", letterSpacing: "0.3em", fontWeight: 700, margin: 0 }}>
-                            {currentUser?.role === 'SUPER_ADMIN' ? "Organization View" : `${currentUser?.username} · ${team.length} Members`}
+                            { (currentUser?.role === 'SUPER_ADMIN' && currentUser?.email === SUPER_ADMIN_EMAIL) ? "Organization View" : `${currentUser?.username} · ${team.length} Members`}
                         </p>
-                        {currentUser?.role === 'SUPER_ADMIN' && (
+                        {currentUser?.role === 'SUPER_ADMIN' && currentUser?.email === SUPER_ADMIN_EMAIL && (
                             <div style={{ display: "flex", alignItems: "center", gap: 10, marginLeft: 20, paddingLeft: 20, borderLeft: "1px solid rgba(255,255,255,0.06)" }}>
                                 <span style={{ fontSize: 10, fontWeight: 800, color: "rgba(255,255,255,0.2)", textTransform: "uppercase", whiteSpace: "nowrap" }}>Managing Lead:</span>
                                 <select 

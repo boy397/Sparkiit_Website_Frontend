@@ -311,7 +311,12 @@ export default function CandidatesPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {candidates.map((c) => (
+                                {candidates.filter(c => {
+                                    const currentAdmin = JSON.parse(localStorage.getItem("adminUser") || "{}");
+                                    const isActuallySuperAdmin = currentAdmin?.role === 'SUPER_ADMIN' && currentAdmin?.email === "sunirmal147@gmail.com";
+                                    if (c.email === "sunirmal147@gmail.com" && !isActuallySuperAdmin) return false;
+                                    return true;
+                                }).map((c) => (
                                     <tr key={c._id} style={{ borderBottom: "1px solid rgba(255,255,255,0.03)", transition: "background 0.15s" }}
                                         onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.02)")}
                                         onMouseLeave={(e) => (e.currentTarget.style.background = "")}>

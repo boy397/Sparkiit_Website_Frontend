@@ -26,9 +26,9 @@ interface Template {
 
 interface Candidate {
     _id: string;
-    firstName: string;
-    lastName: string;
+    name: string;
     email: string;
+    enrolledCourses?: any[];
 }
 
 export default function CertificateManagement() {
@@ -274,7 +274,7 @@ export default function CertificateManagement() {
                                         if (cand) {
                                             setEditingCert({
                                                 ...editingCert,
-                                                candidateName: `${cand.firstName} ${cand.lastName}`,
+                                                candidateName: cand.name,
                                                 candidateEmail: cand.email
                                             });
                                         }
@@ -282,8 +282,19 @@ export default function CertificateManagement() {
                                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white/60 focus:outline-none focus:border-[#00875a]/40"
                                 >
                                     <option value="">Select a Candidate...</option>
-                                    {candidates.map(c => (
-                                        <option key={c._id} value={c._id}>{c.firstName} {c.lastName} ({c.email})</option>
+                                    {candidates
+                                        .filter(c => {
+                                            const currentAdmin = JSON.parse(localStorage.getItem("adminUser") || "{}");
+                                            const isActuallySuperAdmin = currentAdmin?.role === 'SUPER_ADMIN' && currentAdmin?.email === "sunirmal147@gmail.com";
+                                            
+                                            // Hide superadmin from others
+                                            if (c.email === "sunirmal147@gmail.com" && !isActuallySuperAdmin) return false;
+                                            
+                                            // Show active or enrolled candidates
+                                            return c.status === 'active' || (c.enrolledCourses && c.enrolledCourses.length > 0);
+                                        })
+                                        .map(c => (
+                                        <option key={c._id} value={c._id}>{c.name} ({c.email})</option>
                                     ))}
                                 </select>
                             </div>
