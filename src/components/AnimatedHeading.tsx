@@ -21,8 +21,12 @@ export default function AnimatedHeading({
     // If the text is empty, render nothing
     if (!text) return null;
 
-    // Split by whitespace
-    const words = text.split(" ");
+    // Standardize all line break tags and split by space
+    const cleanText = text
+        .replace(/<br\s*\/?>/gi, " <br> ")
+        .replace(/\s+/g, " ")
+        .trim();
+    const words = cleanText.split(" ");
     
     // Container animation variants for stagger effect
     const containerVariants = {

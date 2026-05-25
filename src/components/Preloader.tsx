@@ -8,7 +8,7 @@ import { gsap } from "gsap";
 
 const PARTICLE_COUNT = 5000;
 
-function Particles({ onComplete }: { onComplete: () => void }) {
+function Particles({ onComplete, containerRef }: { onComplete: () => void, containerRef: React.RefObject<HTMLDivElement | null> }) {
     const pointsRef = useRef<THREE.Points>(null!);
     const rotationIntensity = useRef({ value: 1 });
     const [animationStarted, setAnimationStarted] = useState(false);
@@ -39,70 +39,7 @@ function Particles({ onComplete }: { onComplete: () => void }) {
         return positions;
     }, []);
 
-    // Text Positions (sampled from canvas)
-    const textPositions = useMemo(() => {
-        const positions = new Float32Array(PARTICLE_COUNT * 3);
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d")!;
-        
-        // Increase canvas size for higher resolution sampling
-        canvas.width = 2000;
-        canvas.height = 400;
-        
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "white";
-        // Use a standard thick font
-        ctx.font = "bold 200px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("SPARKIIT", canvas.width / 2, canvas.height / 2);
-
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-        const sampledPoints = [];
-        
-        // Sample points from the text
-        for (let y = 0; y < canvas.height; y += 3) {
-            for (let x = 0; x < canvas.width; x += 3) {
-                if (imageData[(y * canvas.width + x) * 4] > 128) {
-                    sampledPoints.push({ x, y });
-                }
-            }
-        }
-
-        // Shuffle points to ensure even distribution during animation
-        for (let i = sampledPoints.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [sampledPoints[i], sampledPoints[j]] = [sampledPoints[j], sampledPoints[i]];
-        }
-
-        // Calculate bounding box for centering and scaling
-        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-        sampledPoints.forEach(p => {
-            if (p.x < minX) minX = p.x;
-            if (p.x > maxX) maxX = p.x;
-            if (p.y < minY) minY = p.y;
-            if (p.y > maxY) maxY = p.y;
-        });
-
-        const centerX = (minX + maxX) / 2;
-        const centerY = (minY + maxY) / 2;
-        const width = maxX - minX;
-        
-        // Target width in 3D units (fits well in 45deg FOV at 10 units distance)
-        const targetWidth = 8; 
-        const scale = targetWidth / width;
-
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
-            const p = sampledPoints[i % sampledPoints.length];
-            // Center and scale
-            positions[i * 3] = (p.x - centerX) * scale;
-            positions[i * 3 + 1] = (centerY - p.y) * scale;
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 0.3;
-        }
-        return positions;
-    }, []);
-
+    // Particle Loader timeline: beautiful sphere rotation, cosmic scatter, and fade-out
     useEffect(() => {
         if (!pointsRef.current) return;
 
@@ -110,14 +47,13 @@ function Particles({ onComplete }: { onComplete: () => void }) {
         
         const tl = gsap.timeline({
             onComplete: () => {
-                setTimeout(onComplete, 800);
+                onComplete();
             }
         });
 
-        // 1. Initial Sphere Bloom
-        tl.to(currentPos, {
+        // 1. Initial Sphere Bloom & Spin
+        tl.to({}, {
             duration: 1.5,
-            ease: "power2.inOut",
             onUpdate: () => {
                 if (pointsRef.current) {
                     pointsRef.current.geometry.attributes.position.needsUpdate = true;
@@ -125,9 +61,9 @@ function Particles({ onComplete }: { onComplete: () => void }) {
             }
         });
 
-        // 2. Scatter
+        // 2. Cosmic Scatter (Explosion)
         tl.to(currentPos, {
-            duration: 1.2,
+            duration: 1.5,
             ease: "expo.out",
             onUpdate: function(this: any) {
                 const progress = this.progress();
@@ -138,31 +74,18 @@ function Particles({ onComplete }: { onComplete: () => void }) {
                     pointsRef.current.geometry.attributes.position.needsUpdate = true;
                 }
             }
-        }, "+=0.2");
+        });
 
-        // 3. Reform into Text
-        tl.to(currentPos, {
-            duration: 1.8,
-            ease: "back.out(1.2)",
-            onUpdate: function(this: any) {
-                const progress = this.progress();
-                for (let i = 0; i < currentPos.length; i++) {
-                    currentPos[i] = THREE.MathUtils.lerp(scatteredPositions[i], textPositions[i], progress);
-                }
-                if (pointsRef.current) {
-                    pointsRef.current.geometry.attributes.position.needsUpdate = true;
-                }
-            }
-        }, "-=0.3");
+        // 3. Fade out the entire container during the scatter animation
+        if (containerRef.current) {
+            tl.to(containerRef.current, {
+                opacity: 0,
+                duration: 1.2,
+                ease: "power2.inOut"
+            }, "-=1.2");
+        }
 
-        // Stop rotation during reform
-        tl.to(rotationIntensity.current, {
-            value: 0,
-            duration: 1.2,
-            ease: "power2.inOut"
-        }, "-=1.5");
-
-    }, [onComplete, scatteredPositions, textPositions]);
+    }, [onComplete, scatteredPositions, containerRef]);
 
     useFrame((state) => {
         if (rotationIntensity.current.value > 0) {
@@ -204,10 +127,11 @@ function Particles({ onComplete }: { onComplete: () => void }) {
 }
 
 export default function ParticleLoader({ onComplete }: { onComplete: () => void }) {
+    const containerRef = useRef<HTMLDivElement>(null);
     return (
-        <div className="fixed inset-0 z-[9999] bg-[#050505] flex items-center justify-center overflow-hidden">
+        <div ref={containerRef} className="fixed inset-0 z-[9999] bg-[#050505] flex items-center justify-center overflow-hidden">
             <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>
-                <Particles onComplete={onComplete} />
+                <Particles onComplete={onComplete} containerRef={containerRef} />
             </Canvas>
             
             {/* Overlay Gradient */}

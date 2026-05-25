@@ -255,6 +255,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         "Authorization": `Bearer ${token}`
                     }
                 });
+                if (res.status === 401 || res.status === 403) {
+                    localStorage.removeItem("adminToken");
+                    localStorage.removeItem("adminUser");
+                    setUser(null);
+                    if (pathname !== "/admin/login") {
+                        router.push("/admin/login");
+                    }
+                    setIsLoading(false);
+                    return;
+                }
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 const data = await res.json();
                 if (data.success) {
