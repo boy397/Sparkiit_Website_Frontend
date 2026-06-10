@@ -32,7 +32,7 @@ export default function OurStory(props: OurStoryContent) {
     };
 
     return (
-        <section ref={containerRef} className="py-24 px-6 md:px-20 bg-[#050505] overflow-hidden">
+        <section ref={containerRef} className="py-20 md:py-24 px-4 sm:px-6 md:px-20 bg-[#050505] overflow-hidden">
             <motion.div 
                 style={{ opacity: opacityFade }}
                 className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-start"
@@ -60,7 +60,7 @@ export default function OurStory(props: OurStoryContent) {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.1 }}
-                        className="text-xl md:text-3xl text-gray-300 leading-tight font-medium"
+                        className="text-lg sm:text-xl md:text-3xl text-gray-300 leading-tight font-medium"
                     >
                         {story.subtitle}
                     </motion.p>

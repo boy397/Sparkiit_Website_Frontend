@@ -55,6 +55,53 @@ export interface Testimonial {
     avatar?: string;
 }
 
+export interface Mentor {
+    _id: string;
+    name: string;
+    description: string;
+    photo: string;
+    order: number;
+}
+
+export interface FAQ {
+    _id: string;
+    question: string;
+    answer: string;
+    order?: number;
+}
+
+export interface BlogItem {
+    _id: string;
+    title: string;
+    slug?: string;
+    content?: string;
+    excerpt?: string;
+    coverImage?: string;
+    createdAt?: string;
+}
+
+export interface EventItem {
+    _id: string;
+    title: string;
+    date?: string;
+    description?: string;
+    image?: string;
+}
+
+export interface SocialLinkItem {
+    _id: string;
+    platform: string;
+    url: string;
+    order?: number;
+}
+
+export interface MenuItem {
+    _id: string;
+    label: string;
+    href: string;
+    order?: number;
+}
+
 export interface HomepageData {
     projects: Project[];
     services: Service[];
@@ -63,6 +110,13 @@ export interface HomepageData {
     recognitions?: Recognition[];
     brands?: Brand[];
     collaborators?: Brand[];
+    mentors?: Mentor[];
+    faqs?: FAQ[];
+    blogs?: BlogItem[];
+    events?: EventItem[];
+    socialLinks?: SocialLinkItem[];
+    menus?: MenuItem[];
+    footerSettings?: any[];
     content: {
         hero?: {
             word1?: string;
@@ -70,6 +124,8 @@ export interface HomepageData {
             word3?: string;
             tagline?: string;
             ctaText?: string;
+            videoThumbnail?: string;
+            videoUrl?: string;
         };
         story?: {
             title?: string;
@@ -102,6 +158,19 @@ export interface HomepageData {
             title?: string;
             subtitle?: string;
         };
+        expertise?: {
+            title?: string;
+            description?: string;
+        };
+        insights?: {
+            title?: string;
+            description?: string;
+        };
+        mentors?: {
+            title?: string;
+            subtitle?: string;
+        };
+        [key: string]: any;
     };
     settings?: {
         contact_email?: string;
@@ -181,6 +250,23 @@ const normalizeUrls = (data: HomepageData | null): HomepageData | null => {
             ...h,
             image: fixUrl(h.image) || ""
         })) || [],
+        mentors: data.mentors?.map(m => ({
+            ...m,
+            photo: fixUrl(m.photo)
+        })) || [],
+        testimonials: data.testimonials?.map(t => ({
+            ...t,
+            avatar: fixUrl(t.avatar)
+        })) || [],
+        blogs: data.blogs?.map(b => ({
+            ...b,
+            coverImage: fixUrl(b.coverImage)
+        })) || [],
+        events: data.events?.map(ev => ({
+            ...ev,
+            image: fixUrl(ev.image)
+        })) || [],
+        faqs: data.faqs || [],
         pageStructure: data.pageStructure?.map(s => ({
             ...s,
             content: normalizeObject(s.content)
@@ -188,15 +274,23 @@ const normalizeUrls = (data: HomepageData | null): HomepageData | null => {
     };
 };
 
+export function invalidateHomepageCache() {
+    localStorage.removeItem('homepage_data');
+    localStorage.removeItem('homepage_data_ts');
+}
+
 export function useHomepageData() {
     const [data, setData] = useState<HomepageData | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        // Try to load from cache first
+        // Try to load from cache first (only if less than 2 min old)
         const cached = localStorage.getItem('homepage_data');
-        if (cached) {
+        const cachedTs = localStorage.getItem('homepage_data_ts');
+        const cacheAge = cachedTs ? Date.now() - parseInt(cachedTs, 10) : Infinity;
+
+        if (cached && cacheAge < 120_000) {
             try {
                 setData(normalizeUrls(JSON.parse(cached)));
                 setLoading(false);
@@ -211,7 +305,13 @@ export function useHomepageData() {
                 if (json.success) {
                     const normalized = normalizeUrls(json.data);
                     setData(normalized);
-                    localStorage.setItem('homepage_data', JSON.stringify(normalized));
+                    // Store raw data (before normalization) to avoid double-normalizing on cache read
+                    try {
+                        localStorage.setItem('homepage_data', JSON.stringify(json.data));
+                        localStorage.setItem('homepage_data_ts', Date.now().toString());
+                    } catch (storageErr) {
+                        console.warn("Failed to cache homepage data to localStorage (possibly exceeded quota):", storageErr);
+                    }
                 } else {
                     setError(json.message);
                 }

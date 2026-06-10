@@ -244,14 +244,14 @@ export default function RecognisedBy(props: RecognisedByContent) {
         <section ref={targetRef} className="h-[300vh] bg-[#050505] relative">
             <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
                 
-                <div className="px-6 md:px-20 w-full mb-12">
+                <div className="px-4 sm:px-6 md:px-20 w-full mb-12">
                     <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white uppercase tracking-tighter leading-none">
                         {/* Swapped TextReveal for the new Word-by-Word Hover effect */}
                         <HoverWordTitle text={title} />
                     </h2>
                 </div>
 
-                <motion.div style={{ x }} className="flex gap-8 px-6 md:px-20 w-max">
+                <motion.div style={{ x }} className="flex gap-6 md:gap-8 px-4 sm:px-6 md:px-20 w-max">
                     {items.map((item: any, index: number) => (
                         <RecognitionCard 
                             key={index} 
@@ -286,7 +286,7 @@ export default function RecognisedBy(props: RecognisedByContent) {
                             initial={{ opacity: 0, y: 50, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 50, scale: 0.95 }}
-                            className="relative w-full max-w-5xl h-[85vh] bg-[#0a0a0a] border border-white/10 rounded-[30px] overflow-hidden shadow-2xl flex flex-col z-10"
+                            className="relative w-full max-w-5xl h-[90vh] md:h-[85vh] bg-[#0a0a0a] border border-white/10 rounded-2xl md:rounded-[30px] overflow-hidden shadow-2xl flex flex-col z-10"
                         >
                             {/* Modal Header */}
                             <div className="flex items-center justify-between p-6 border-b border-white/5 bg-white/2 flex-shrink-0">

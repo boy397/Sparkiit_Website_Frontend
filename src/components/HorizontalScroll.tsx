@@ -44,16 +44,24 @@ const services = [
 export interface HorizontalScrollContent {
     title?: string;
     subtitle?: string;
-    items?: { id: number; num: string; title: string; category: string; description: string; image: string }[];
+    items?: { id: number; num: string; title: string; category: string; description: string; image: string; link?: string }[];
 }
 
 export default function HorizontalScrollSection(props: HorizontalScrollContent) {
     const [activeIndex, setActiveIndex] = useState(0);
     const router = useRouter();
 
-    const handleCardClick = (index: number, category: string) => {
+    const handleCardClick = (index: number, category: string, link?: string) => {
         if (index === activeIndex) {
-            router.push(`/domains?category=${encodeURIComponent(category)}`);
+            if (link) {
+                if (link.startsWith('http')) {
+                    window.open(link, '_blank');
+                } else {
+                    router.push(link);
+                }
+            } else {
+                router.push(`/domains?category=${encodeURIComponent(category)}`);
+            }
         } else {
             setActiveIndex(index);
         }
@@ -70,7 +78,8 @@ export default function HorizontalScrollSection(props: HorizontalScrollContent) 
         title: item.title,
         category: item.category || "GENERAL",
         description: item.description,
-        image: item.image || item.thumbnailUrl || "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=2874&auto=format&fit=crop"
+        image: item.image || item.thumbnailUrl || "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=2874&auto=format&fit=crop",
+        link: item.link || ""
     }));
 
     const items = mappedItems.length > 0 ? mappedItems : services;
@@ -158,7 +167,7 @@ export default function HorizontalScrollSection(props: HorizontalScrollContent) 
                                     stiffness: 260,
                                     damping: 30
                                 }}
-                                onClick={() => handleCardClick(index, service.category)}
+                                onClick={() => handleCardClick(index, service.category, (service as any).link)}
                                 className="absolute w-[260px] xs:w-[300px] md:w-[450px] aspect-[4/5] md:aspect-[3/4] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group cursor-pointer"
                                 style={{
                                     zIndex: 50 - Math.abs(displayOffset),

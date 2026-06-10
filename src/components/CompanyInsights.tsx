@@ -46,7 +46,7 @@ export default function CompanyInsights(props: CompanyInsightsContent) {
     const ctaLink = props.ctaLink || "/blog";
 
     return (
-        <section className="py-12 px-6 md:px-20 bg-[#050505]">
+        <section className="py-12 px-4 sm:px-6 md:px-20 bg-[#050505]">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     {statsItems.map((stat, index) => (
@@ -56,10 +56,10 @@ export default function CompanyInsights(props: CompanyInsightsContent) {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: index * 0.1 }}
-                            className="bg-white/5 p-6 md:p-10 rounded-3xl border border-white/5 text-center group hover:border-[#00875a]/30 transition-all"
+                            className="bg-white/5 p-4 sm:p-6 md:p-10 rounded-[1.5rem] md:rounded-3xl border border-white/5 text-center group hover:border-[#00875a]/30 transition-all flex flex-col justify-center"
                         >
                             <h4 className="text-gray-500 font-bold uppercase tracking-widest text-[10px] sm:text-xs mb-4 group-hover:text-[#00875a] transition-colors">{stat.label}</h4>
-                            <p className="text-4xl sm:text-5xl font-black text-white tracking-tighter">
+                            <p className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tighter mt-auto">
                                 <Counter value={stat.val} />+
                             </p>
                         </motion.div>
@@ -71,7 +71,7 @@ export default function CompanyInsights(props: CompanyInsightsContent) {
                         <AnimatedHeading
                             text={title.replace(' & ', ' & <br /> ')}
                             highlightWords={["insights", "articles"]}
-                            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase tracking-tighter mb-6"
+                            className="text-2xl sm:text-3xl md:text-5xl font-bold text-white uppercase tracking-tighter mb-6"
                         />
                         <p className="text-gray-400 leading-relaxed font-medium">
                             {description}

@@ -2,6 +2,7 @@
 import { API_BASE_URL } from "@/lib/api-config";
 import React, { useState, useEffect } from "react";
 import { Layout, Save, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { invalidateHomepageCache } from "@/hooks/useHomepageData";
 
 const API_BASE = API_BASE_URL + "/api/admin";
 
@@ -99,6 +100,7 @@ export default function FooterSettings() {
             });
             await Promise.all(promises);
             setStatus({ type: 'success', msg: 'Footer settings updated' });
+            invalidateHomepageCache();
             setTimeout(() => setStatus(null), 3000);
         } catch (err) {
             setStatus({ type: 'error', msg: 'Failed to save settings' });

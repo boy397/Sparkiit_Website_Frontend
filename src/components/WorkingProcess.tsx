@@ -54,11 +54,11 @@ export default function WorkingProcess(props: WorkingProcessContent) {
     ];
 
     return (
-        <section className="py-12 px-6 md:px-20 bg-[#050505] ">
+        <section className="py-12 px-4 sm:px-6 md:px-20 bg-[#050505] ">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
                     
-                    <h2 className="text-5xl md:text-7xl font-bold text-white uppercase tracking-tighter cursor-default">
+                    <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white uppercase tracking-tighter cursor-default">
                         {/* Split by break first, then by word */}
                         {(process.title || "").split(' <br /> ').map((line: string, i: number) => (
                             <span key={i} className="block">

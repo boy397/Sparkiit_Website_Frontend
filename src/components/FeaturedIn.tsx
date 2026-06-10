@@ -61,7 +61,7 @@ export default function FeaturedIn(props: FeaturedInContent) {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.05 }}
-                                    className={`group flex flex-col items-center gap-4 flex-shrink-0 w-32 sm:w-40 md:w-48 ${hasLink ? "cursor-pointer" : "cursor-default"}`}
+                                    className={`group flex flex-col items-center gap-3 md:gap-4 flex-shrink-0 w-28 sm:w-32 md:w-40 lg:w-48 ${hasLink ? "cursor-pointer" : "cursor-default"}`}
                                     onClick={() => handleItemClick(pub)}
                                 >
                                     <div className="w-full aspect-square rounded-[2rem] overflow-hidden border border-white/10 group-hover:border-[#00875a]/40 bg-white/5 relative transition-all duration-500 shadow-lg group-hover:shadow-[0_10px_30px_-10px_rgba(0,135,90,0.2)]">

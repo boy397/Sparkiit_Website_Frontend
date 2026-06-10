@@ -58,7 +58,7 @@ export default function ContactSection(props: ContactSectionProps) {
     };
 
     return (
-        <section className="py-24 px-6 md:px-20 bg-[#050505]">
+        <section className="py-20 md:py-24 px-4 sm:px-6 md:px-20 bg-[#050505]">
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20">
                 <div className="lg:w-1/2">
                     <motion.p
@@ -75,7 +75,7 @@ export default function ContactSection(props: ContactSectionProps) {
                             ? (title || "").replace("Into ACTION.", "<br /> Into ACTION.") 
                             : (title || "")}
                         highlightWords={["Into", "ACTION"]}
-                        className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-12"
+                        className="text-4xl sm:text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-12"
                     />
 
                     <div className="space-y-10">
@@ -114,7 +114,7 @@ export default function ContactSection(props: ContactSectionProps) {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="lg:w-1/2 bg-white/[0.03] p-10 md:p-12 rounded-[40px] border border-white/10 backdrop-blur-xl relative overflow-hidden group/form"
+                    className="lg:w-1/2 bg-white/[0.03] p-6 sm:p-10 md:p-12 rounded-[2rem] md:rounded-[40px] border border-white/10 backdrop-blur-xl relative overflow-hidden group/form"
                 >
                     <div className="absolute top-0 right-0 p-8 opacity-5 grayscale group-hover/form:grayscale-0 group-hover/form:opacity-10 transition-all duration-1000">
                         <Send size={150} className="-rotate-12" />

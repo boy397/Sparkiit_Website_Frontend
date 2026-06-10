@@ -44,8 +44,8 @@ export default function Footer(props: FooterContent) {
     };
 
     return (
-        <footer className="bg-[#050505] border-t border-white/5 pt-12 pb-12 px-6 md:px-20">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-12">
+        <footer className="bg-[#050505] border-t border-white/5 pt-12 pb-[calc(env(safe-area-inset-bottom)+3rem)] px-6 md:px-20">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 mb-12">
                 <div className="lg:col-span-2">
                     <Link 
                         href="/" 
@@ -87,9 +87,9 @@ export default function Footer(props: FooterContent) {
                         <input
                             type="email"
                             placeholder="Email Address"
-                            className="bg-transparent border-none focus:ring-0 text-white w-full placeholder:text-white/20"
+                            className="bg-transparent border-none outline-none focus:ring-0 text-white w-full placeholder:text-white/20 min-w-0"
                         />
-                        <button className="text-[#00875a] font-bold uppercase text-xs tracking-widest">SUBMIT</button>
+                        <button className="text-[#00875a] font-bold uppercase text-xs tracking-widest shrink-0 ml-2">SUBMIT</button>
                     </div>
                 </div>
             </div>

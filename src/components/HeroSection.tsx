@@ -120,13 +120,13 @@ export default function HeroSection(props: HeroContent) {
     const xTransforms = [xIdea, xInnovate, xTransform];
 
     return (
-        <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center px-6 md:px-20 pt-24 md:pt-20 overflow-hidden">
+        <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-20 pt-[calc(env(safe-area-inset-top)+6rem)] md:pt-20 overflow-hidden">
             {/* Background gradients/effects mimicking the reference */}
             <div className="absolute top-0 right-0 w-[100vw] md:w-[80vw] h-[80vh] bg-[#00875a]/10 blur-[80px] md:blur-[120px] rounded-full pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[70vw] md:w-[50vw] h-[50vh] bg-[#006644]/10 blur-[80px] md:blur-[120px] rounded-full pointer-events-none" />
 
             <div className="relative z-10 max-w-5xl">
-                <h1 className="text-[12vw] xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold uppercase leading-[0.85] tracking-tighter">
+                <h1 className="text-[max(12vw,2.5rem)] xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold uppercase leading-[0.85] tracking-tighter">
                     {words.map((word, index) => (
                         <div key={index} className="flex items-center py-1 md:py-0">
                             <motion.div
@@ -158,7 +158,7 @@ export default function HeroSection(props: HeroContent) {
                 </h1>
             </div>
 
-            <div className="relative z-10 mt-10 md:mt-20 flex flex-col md:flex-row items-start md:items-end justify-between gap-10 border-t border-white/10 pt-10">
+            <div className="relative z-10 mt-10 md:mt-20 flex flex-col md:flex-row items-start md:items-end justify-between gap-10 border-t border-white/10 pt-8 md:pt-10">
                 <div className="max-w-md">
                     <p className="text-sm md:text-base text-gray-400 uppercase tracking-widest leading-relaxed">
                         {hero.tagline}

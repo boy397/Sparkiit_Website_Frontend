@@ -15,6 +15,7 @@ interface HorizontalScrollItem {
     category: string;
     image: string;
     num: string;
+    link?: string;
     order: number;
 }
 
@@ -34,6 +35,7 @@ export default function HorizontalScrollAdminPage() {
         category: "",
         image: "",
         num: "",
+        link: "",
         order: 0 
     });
 
@@ -82,7 +84,7 @@ export default function HorizontalScrollAdminPage() {
                 setTimeout(() => {
                     setIsFormOpen(false);
                     setEditingId(null);
-                    setCurrentItem({ title: "", description: "", category: "", image: "", num: "", order: 0 });
+                    setCurrentItem({ title: "", description: "", category: "", image: "", num: "", link: "", order: 0 });
                     setStatus(null);
                 }, 1500);
             } else {
@@ -121,6 +123,7 @@ export default function HorizontalScrollAdminPage() {
             category: item.category || "",
             image: item.image || "",
             num: item.num || "",
+            link: item.link || "",
             order: item.order || 0 
         });
         setIsFormOpen(true);
@@ -184,7 +187,7 @@ export default function HorizontalScrollAdminPage() {
                     <button 
                         onClick={() => {
                             setEditingId(null);
-                            setCurrentItem({ title: "", description: "", category: "", image: "", num: (items.length + 1).toString().padStart(2, '0'), order: items.length });
+                            setCurrentItem({ title: "", description: "", category: "", image: "", num: (items.length + 1).toString().padStart(2, '0'), link: "", order: items.length });
                             setIsFormOpen(true);
                         }}
                         style={{
@@ -337,6 +340,7 @@ export default function HorizontalScrollAdminPage() {
                             
                             <InputField label="Category" value={currentItem.category} onChange={(val: string) => setCurrentItem({...currentItem, category: val})} placeholder="E-LEARNING" />
                             <InputField label="Image URL" value={currentItem.image} onChange={(val: string) => setCurrentItem({...currentItem, image: val})} placeholder="https://example.com/image.jpg" />
+                            <InputField label="Redirect Link (Optional)" value={currentItem.link || ""} onChange={(val: string) => setCurrentItem({...currentItem, link: val})} placeholder="/domains?category=something OR https://..." />
                             
                             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                                 <label style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)" }}>Description</label>

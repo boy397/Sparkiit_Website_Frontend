@@ -5,6 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Center, Text3D } from "@react-three/drei";
 import * as THREE from "three";
 import { gsap } from "gsap";
+import { motion } from "framer-motion";
 
 const PARTICLE_COUNT = 5000;
 
@@ -129,19 +130,26 @@ function Particles({ onComplete, containerRef }: { onComplete: () => void, conta
 export default function ParticleLoader({ onComplete }: { onComplete: () => void }) {
     const containerRef = useRef<HTMLDivElement>(null);
     return (
-        <div ref={containerRef} className="fixed inset-0 z-[9999] bg-[#050505] flex items-center justify-center overflow-hidden">
-            <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>
-                <Particles onComplete={onComplete} containerRef={containerRef} />
-            </Canvas>
-            
-            {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-radial-gradient from-[#00875a]/5 to-transparent pointer-events-none" />
-            
-            <style jsx>{`
-                .bg-radial-gradient {
-                    background: radial-gradient(circle at center, var(--tw-gradient-from) 0%, var(--tw-gradient-to) 100%);
-                }
-            `}</style>
-        </div>
+        <motion.div
+            key="preloader"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+        >
+            <div ref={containerRef} className="fixed inset-0 z-[9999] bg-[#050505] flex items-center justify-center overflow-hidden">
+                <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>
+                    <Particles onComplete={onComplete} containerRef={containerRef} />
+                </Canvas>
+                
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-radial-gradient from-[#00875a]/5 to-transparent pointer-events-none" />
+                
+                <style jsx>{`
+                    .bg-radial-gradient {
+                        background: radial-gradient(circle at center, var(--tw-gradient-from) 0%, var(--tw-gradient-to) 100%);
+                    }
+                `}</style>
+            </div>
+        </motion.div>
     );
 }

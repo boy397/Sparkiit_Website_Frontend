@@ -15,6 +15,7 @@ import {
     Image as ImageIcon
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { invalidateHomepageCache } from "@/hooks/useHomepageData";
 
 const API_BASE = API_BASE_URL + "/api/admin";
 
@@ -83,6 +84,7 @@ export default function GeneralSettings() {
             
             if (data.success) {
                 setStatus({ type: 'success', msg: 'System Branding & General settings deployed!' });
+                invalidateHomepageCache();
                 setTimeout(() => setStatus(null), 3000);
             } else {
                 throw new Error("Failed to save");

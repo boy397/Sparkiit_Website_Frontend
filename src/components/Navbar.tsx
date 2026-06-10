@@ -145,7 +145,7 @@ export default function Navbar() {
             }}
             animate={hidden ? "hidden" : "visible"}
             transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="fixed top-0 w-full z-50 flex items-center justify-between px-5 md:px-20 py-4 backdrop-blur-md border-b border-white/5 bg-[#050505]/50"
+            className="fixed top-0 w-full z-50 flex items-center justify-between px-4 sm:px-6 md:px-20 py-3 md:py-4 backdrop-blur-md border-b border-white/5 bg-[#050505]/50 pt-[calc(env(safe-area-inset-top)+0.75rem)] md:pt-[calc(env(safe-area-inset-top)+1rem)]"
         >
             <Suspense fallback={null}>
                 <SearchParamsLoader onChange={handleSearchParamsChange} />
@@ -363,7 +363,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: "100%" }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 h-[100dvh] bg-[#050505] z-[100] overflow-y-auto px-6 py-20 xl:hidden"
+                        className="fixed inset-0 h-[100dvh] bg-[#050505] z-[100] overflow-y-auto px-6 py-20 pt-[calc(env(safe-area-inset-top)+5rem)] xl:hidden"
                     >
                         <div className="flex flex-col gap-6">
                             <div className="flex items-center justify-between mb-8">
