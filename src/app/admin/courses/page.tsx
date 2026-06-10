@@ -130,12 +130,29 @@ export default function CoursesPage() {
     };
 
     const handleSave = async () => {
+        if (!form.title.trim()) {
+            alert("Title is required");
+            return;
+        }
+        if (!form.description.trim()) {
+            alert("Description is required");
+            return;
+        }
+        if (!form.category) {
+            alert("Domain/Category is required");
+            return;
+        }
+        if (!form.duration.trim()) {
+            alert("Duration is required");
+            return;
+        }
+
         setSaving(true);
         const url = editing ? `${API_BASE}/courses/${editing._id}` : `${API_BASE}/courses`;
         const method = editing ? "PUT" : "POST";
         const token = localStorage.getItem("adminToken");
         try {
-            await fetch(url, {
+            const res = await fetch(url, {
                 method,
                 headers: {
                     "Content-Type": "application/json",
@@ -143,9 +160,16 @@ export default function CoursesPage() {
                 },
                 body: JSON.stringify(form)
             });
-            setModalOpen(false);
-            fetchCourses();
-        } catch { /* noop */ }
+            const data = await res.json();
+            if (res.ok && data.success) {
+                setModalOpen(false);
+                fetchCourses();
+            } else {
+                alert(data.message || "Failed to save course");
+            }
+        } catch (err: any) {
+            alert(err.message || "An error occurred while saving the course");
+        }
         setSaving(false);
     };
 

@@ -18,6 +18,7 @@ export default function RecognitionsPage() {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [editingId, setEditingId] = useState<string | null>(null);
     const [saving, setSaving] = useState(false);
+    const [uploading, setUploading] = useState(false);
     
     const [form, setForm] = useState({
         name: "",
@@ -25,6 +26,74 @@ export default function RecognitionsPage() {
         link: "",
         order: 0
     });
+
+    const [uploadingPdf, setUploadingPdf] = useState(false);
+
+    const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setUploading(true);
+        const formData = new FormData();
+        formData.append("image", file);
+        formData.append("uploadType", "recognitions");
+
+        const token = localStorage.getItem("adminToken");
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/admin/upload-image`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData
+            });
+            const json = await res.json();
+            if (json.success) {
+                setForm(prev => ({ ...prev, logoUrl: `${API_BASE_URL}${json.data.url}` }));
+            } else {
+                alert(json.message || "Upload failed");
+            }
+        } catch (err) {
+            console.error("Logo upload error:", err);
+            alert("An error occurred while uploading the logo.");
+        } finally {
+            setUploading(false);
+        }
+    };
+
+    const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setUploadingPdf(true);
+        const formData = new FormData();
+        formData.append("pdf", file);
+        formData.append("uploadType", "documents");
+
+        const token = localStorage.getItem("adminToken");
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/admin/upload-pdf`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData
+            });
+            const json = await res.json();
+            if (json.success) {
+                setForm(prev => ({ ...prev, link: `${API_BASE_URL}${json.data.url}` }));
+            } else {
+                alert(json.message || "Upload failed");
+            }
+        } catch (err) {
+            console.error("PDF upload error:", err);
+            alert("An error occurred while uploading the PDF.");
+        } finally {
+            setUploadingPdf(false);
+        }
+    };
 
     const fetchItems = useCallback(() => {
         const token = localStorage.getItem("adminToken");
@@ -167,6 +236,39 @@ export default function RecognitionsPage() {
                             onChange={e => setForm({...form, logoUrl: e.target.value})}
                             placeholder="https://company.com/logo.png"
                         />
+                        <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2 block">Upload Logo</label>
+                        <div className="flex items-center gap-4 mb-4">
+                            <label className="flex-1 cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all rounded-lg p-3 text-center text-sm text-white/80 hover:text-white font-medium flex items-center justify-center gap-2">
+                                {uploading ? (
+                                    <>
+                                        <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                        </svg>
+                                        Uploading...
+                                    </>
+                                ) : (
+                                    <>
+                                        <svg className="w-5 h-5 text-white/60 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                        </svg>
+                                        Upload Logo File
+                                    </>
+                                )}
+                                <input 
+                                    type="file" 
+                                    accept="image/*" 
+                                    className="hidden" 
+                                    onChange={handleLogoUpload}
+                                    disabled={uploading}
+                                />
+                            </label>
+                            {form.logoUrl && (
+                                <div className="w-12 h-12 rounded-lg bg-white/10 p-2 flex items-center justify-center border border-white/10 shrink-0">
+                                    <img src={form.logoUrl} alt="Preview" className="w-full h-full object-contain" />
+                                </div>
+                            )}
+                        </div>
                         <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2 block">Article Link (Optional)</label>
                         <input 
                             style={inputStyle}
@@ -174,6 +276,42 @@ export default function RecognitionsPage() {
                             onChange={e => setForm({...form, link: e.target.value})}
                             placeholder="https://news-site.com/article"
                         />
+                        <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2 block">Upload Verification PDF</label>
+                        <div className="flex items-center gap-4 mb-4">
+                            <label className="flex-1 cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all rounded-lg p-3 text-center text-sm text-white/80 hover:text-white font-medium flex items-center justify-center gap-2">
+                                {uploadingPdf ? (
+                                    <>
+                                        <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                        </svg>
+                                        Uploading PDF...
+                                    </>
+                                ) : (
+                                    <>
+                                        <svg className="w-5 h-5 text-white/60 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Upload Verification PDF
+                                    </>
+                                )}
+                                <input 
+                                    type="file" 
+                                    accept="application/pdf" 
+                                    className="hidden" 
+                                    onChange={handlePdfUpload}
+                                    disabled={uploadingPdf}
+                                />
+                            </label>
+                            {form.link && form.link.endsWith(".pdf") && (
+                                <div className="text-[10px] bg-[#00875a]/20 border border-[#00875a]/30 text-[#00875a] px-3 py-2 rounded-lg font-bold uppercase tracking-wider shrink-0 flex items-center gap-1">
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    PDF Attached
+                                </div>
+                            )}
+                        </div>
                         <label className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2 block">Order Index</label>
                         <input 
                             style={inputStyle}

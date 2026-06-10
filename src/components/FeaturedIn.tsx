@@ -22,7 +22,7 @@ export interface FeaturedInContent {
 
 export default function FeaturedIn(props: FeaturedInContent) {
     const { data } = useHomepageData();
-    const title = props.title || "Recognised By";
+    const title = props.title || "Featured In";
     const items = props.items || (data?.brands && data.brands.length > 0 ? data.brands : publications);
 
     const handleItemClick = (item: any) => {
@@ -46,7 +46,7 @@ export default function FeaturedIn(props: FeaturedInContent) {
                         </span>
                         <AnimatedHeading 
                             text={title}
-                            highlightWords={["by"]}
+                            highlightWords={["in"]}
                             className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter"
                         />
                     </div>
