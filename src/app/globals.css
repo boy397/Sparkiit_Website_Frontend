@@ -94,7 +94,7 @@ p, span, li, label, strong, em, b, i {
     text-shadow: 0 0 15px rgba(0, 135, 90, 0.25);
   }
   
-  p:hover, span:hover, li:hover, label:hover {
+  .interactive-hover:hover {
     color: #00875a;
     text-shadow: 0 0 15px rgba(0, 135, 90, 0.25);
   }

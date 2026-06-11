@@ -13,13 +13,19 @@ export default function Home() {
   const [introComplete, setIntroComplete] = useState(false);
 
   React.useEffect(() => {
-    if (data) {
-        console.log("[Home] Homepage data received:", data);
-    }
-  }, [data]);
+    try {
+      const hasShown = sessionStorage.getItem("preloaderShown");
+      if (hasShown) {
+        setIntroComplete(true);
+      }
+    } catch (e) {}
+  }, []);
 
   const handleComplete = () => {
     setIntroComplete(true);
+    try {
+      sessionStorage.setItem("preloaderShown", "true");
+    } catch (e) {}
   };
 
   // Build enriched sections that pass all relevant homepage data to each section component
@@ -179,15 +185,15 @@ export default function Home() {
     });
   }, [data]);
 
-  // Show content as ready: both intro animation finished AND data loaded (or errored)
-  const contentReady = introComplete && !loading;
+  // Show content as ready: if data is loaded or if we already completed the intro and have data
+  const contentReady = !loading || (introComplete && data !== null);
 
   return (
     <>
       {/* Preloader sits on top with z-[9999] and its own bg-[#050505] */}
       <AnimatePresence>
         {!introComplete && (
-          <Preloader onComplete={handleComplete} />
+          <Preloader onComplete={handleComplete} loading={loading} />
         )}
       </AnimatePresence>
 

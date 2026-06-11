@@ -32,12 +32,26 @@ export default function CourseCatalog({ initialCategory, showTitle = true }: Cou
     const domains = homeData?.services || [];
 
     useEffect(() => {
+        try {
+            const cached = localStorage.getItem('courses_data');
+            if (cached) {
+                setCourses(JSON.parse(cached));
+                setLoading(false);
+            }
+        } catch (e) {
+            // ignore cache parse error
+        }
+
         const fetchAllCourses = async () => {
             try {
                 const res = await fetch(`${API_BASE_URL}/api/public/courses`);
                 const data = await res.json();
                 if (data.success) {
                     setCourses(data.data);
+                    try {
+                        localStorage.setItem('courses_data', JSON.stringify(data.data));
+                        localStorage.setItem('courses_data_ts', Date.now().toString());
+                    } catch (e) {}
                 }
             } catch (err) {
                 console.error("Failed to fetch courses", err);

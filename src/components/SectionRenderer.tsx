@@ -1,29 +1,32 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 import HeroSection from "./HeroSection";
 import Marquee from "./Marquee";
-import HorizontalScroll from "./HorizontalScroll";
-import ServicesOverview from "./ServicesOverview";
-import Collaborations from "./Collaborations";
-import OurStory from "./OurStory";
-import Colleges from "./Colleges";
-import ReviewSection from "./ReviewSection";
-import WorkingProcess from "./WorkingProcess";
-import LatestProjects from "./LatestProjects";
-import ParallaxImage from "./ParallaxImage";
-import CompanyInsights from "./CompanyInsights";
-import RoadmapSection from "./RoadmapSection";
-import FeaturedIn from "./FeaturedIn";
-import MentorsSection from "./MentorsSection";
-import AmbassadorEngagement from "./Testimonials";
-import RichTextSection from "./RichTextSection";
-import FaqSection from "./FaqSection";
-import ContactSection from "./ContactSection";
-import VerifySection from "./VerifySection";
-import CourseCatalogSection from "./CourseCatalogSection";
-import JobPortalSection from "./JobPortalSection";
-import VideoSection from "./VideoSection";
+
+// Dynamically import components below the fold for optimized initial bundle loading
+const HorizontalScroll = dynamic(() => import("./HorizontalScroll"));
+const ServicesOverview = dynamic(() => import("./ServicesOverview"));
+const Collaborations = dynamic(() => import("./Collaborations"));
+const OurStory = dynamic(() => import("./OurStory"));
+const Colleges = dynamic(() => import("./Colleges"));
+const ReviewSection = dynamic(() => import("./ReviewSection"));
+const WorkingProcess = dynamic(() => import("./WorkingProcess"));
+const LatestProjects = dynamic(() => import("./LatestProjects"));
+const ParallaxImage = dynamic(() => import("./ParallaxImage"));
+const CompanyInsights = dynamic(() => import("./CompanyInsights"));
+const RoadmapSection = dynamic(() => import("./RoadmapSection"));
+const FeaturedIn = dynamic(() => import("./FeaturedIn"));
+const MentorsSection = dynamic(() => import("./MentorsSection"));
+const AmbassadorEngagement = dynamic(() => import("./Testimonials"));
+const RichTextSection = dynamic(() => import("./RichTextSection"));
+const FaqSection = dynamic(() => import("./FaqSection"));
+const ContactSection = dynamic(() => import("./ContactSection"));
+const VerifySection = dynamic(() => import("./VerifySection"));
+const CourseCatalogSection = dynamic(() => import("./CourseCatalogSection"));
+const JobPortalSection = dynamic(() => import("./JobPortalSection"));
+const VideoSection = dynamic(() => import("./VideoSection"));
 
 interface Section {
     name: string;
@@ -95,8 +98,6 @@ export default function SectionRenderer({ sections }: SectionRendererProps) {
                     console.warn(`[SectionRenderer] No component found for section: "${sectionName}"`);
                     return null;
                 }
-
-                console.log(`[SectionRenderer] Rendering ${sectionName} with content:`, section.content);
                 
                 return (
                     <React.Fragment key={`${sectionName}-${index}`}>

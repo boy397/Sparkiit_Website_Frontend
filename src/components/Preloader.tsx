@@ -7,12 +7,12 @@ import * as THREE from "three";
 import { gsap } from "gsap";
 import { motion } from "framer-motion";
 
-const PARTICLE_COUNT = 5000;
+const PARTICLE_COUNT = 2000;
 
-function Particles({ onComplete, containerRef }: { onComplete: () => void, containerRef: React.RefObject<HTMLDivElement | null> }) {
+function Particles({ onComplete, containerRef, isExiting }: { onComplete: () => void, containerRef: React.RefObject<HTMLDivElement | null>, isExiting: boolean }) {
     const pointsRef = useRef<THREE.Points>(null!);
     const rotationIntensity = useRef({ value: 1 });
-    const [animationStarted, setAnimationStarted] = useState(false);
+    const animatedRef = useRef(false);
 
     // Initial Sphere Positions
     const spherePositions = useMemo(() => {
@@ -40,9 +40,10 @@ function Particles({ onComplete, containerRef }: { onComplete: () => void, conta
         return positions;
     }, []);
 
-    // Particle Loader timeline: beautiful sphere rotation, cosmic scatter, and fade-out
+    // Particle Loader timeline: cosmic scatter and fade-out when isExiting is triggered
     useEffect(() => {
-        if (!pointsRef.current) return;
+        if (!isExiting || !pointsRef.current || animatedRef.current) return;
+        animatedRef.current = true;
 
         const currentPos = pointsRef.current.geometry.attributes.position.array as Float32Array;
         
@@ -52,19 +53,9 @@ function Particles({ onComplete, containerRef }: { onComplete: () => void, conta
             }
         });
 
-        // 1. Initial Sphere Bloom & Spin
-        tl.to({}, {
-            duration: 1.5,
-            onUpdate: () => {
-                if (pointsRef.current) {
-                    pointsRef.current.geometry.attributes.position.needsUpdate = true;
-                }
-            }
-        });
-
-        // 2. Cosmic Scatter (Explosion)
+        // 1. Cosmic Scatter (Explosion) (reduced duration)
         tl.to(currentPos, {
-            duration: 1.5,
+            duration: 1.0,
             ease: "expo.out",
             onUpdate: function(this: any) {
                 const progress = this.progress();
@@ -77,16 +68,16 @@ function Particles({ onComplete, containerRef }: { onComplete: () => void, conta
             }
         });
 
-        // 3. Fade out the entire container during the scatter animation
+        // 2. Fade out the entire container during the scatter animation (reduced duration)
         if (containerRef.current) {
             tl.to(containerRef.current, {
                 opacity: 0,
-                duration: 1.2,
+                duration: 0.8,
                 ease: "power2.inOut"
-            }, "-=1.2");
+            }, "-=0.8");
         }
 
-    }, [onComplete, scatteredPositions, containerRef]);
+    }, [isExiting, onComplete, spherePositions, scatteredPositions, containerRef]);
 
     useFrame((state) => {
         if (rotationIntensity.current.value > 0) {
@@ -127,8 +118,42 @@ function Particles({ onComplete, containerRef }: { onComplete: () => void, conta
     );
 }
 
-export default function ParticleLoader({ onComplete }: { onComplete: () => void }) {
+export default function ParticleLoader({ onComplete, loading = false }: { onComplete: () => void; loading?: boolean }) {
     const containerRef = useRef<HTMLDivElement>(null);
+    const completedRef = useRef(false);
+    const [minTimePassed, setMinTimePassed] = useState(false);
+    const [isExiting, setIsExiting] = useState(false);
+
+    const handleComplete = React.useCallback(() => {
+        if (!completedRef.current) {
+            completedRef.current = true;
+            onComplete();
+        }
+    }, [onComplete]);
+
+    // Minimum display time of 1.2s for the preloader
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMinTimePassed(true);
+        }, 1200);
+        return () => clearTimeout(timer);
+    }, []);
+
+    // Set exiting state when both minimum time has passed and API load is complete
+    useEffect(() => {
+        if (minTimePassed && !loading) {
+            setIsExiting(true);
+        }
+    }, [minTimePassed, loading]);
+
+    // Safety fallback: exit after 5 seconds even if still loading
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsExiting(true);
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <motion.div
             key="preloader"
@@ -138,7 +163,7 @@ export default function ParticleLoader({ onComplete }: { onComplete: () => void 
         >
             <div ref={containerRef} className="fixed inset-0 z-[9999] bg-[#050505] flex items-center justify-center overflow-hidden">
                 <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>
-                    <Particles onComplete={onComplete} containerRef={containerRef} />
+                    <Particles onComplete={handleComplete} containerRef={containerRef} isExiting={isExiting} />
                 </Canvas>
                 
                 {/* Overlay Gradient */}

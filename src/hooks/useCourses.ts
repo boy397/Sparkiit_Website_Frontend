@@ -26,14 +26,19 @@ export function useCourses() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const cached = localStorage.getItem('courses_data');
-        if (cached) {
-            try {
-                setCourses(JSON.parse(cached));
-                setLoading(false);
-            } catch (e) {
-                console.error("Failed to parse cached courses data", e);
+        const TTL = 120_000; // 2 minutes Cache TTL
+        try {
+            const cached = localStorage.getItem('courses_data');
+            const cachedTs = localStorage.getItem('courses_data_ts');
+            if (cached && cachedTs) {
+                const age = Date.now() - parseInt(cachedTs, 10);
+                if (age < TTL) {
+                    setCourses(JSON.parse(cached));
+                    setLoading(false);
+                }
             }
+        } catch (e) {
+            // Silently ignore localStorage/parse errors
         }
 
         fetch(`${API_BASE}/courses`)
@@ -41,9 +46,14 @@ export function useCourses() {
             .then(json => {
                 if (json.success) {
                     setCourses(json.data);
-                    localStorage.setItem('courses_data', JSON.stringify(json.data));
+                    try {
+                        localStorage.setItem('courses_data', JSON.stringify(json.data));
+                        localStorage.setItem('courses_data_ts', Date.now().toString());
+                    } catch (e) {
+                        // ignore localStorage write errors
+                    }
                 } else {
-                    setError(json.message);
+                    setError(json.message || 'Failed to fetch courses');
                 }
             })
             .catch(err => {

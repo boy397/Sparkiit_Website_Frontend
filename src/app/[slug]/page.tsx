@@ -52,12 +52,12 @@ export default function DynamicPage({ params }: { params: any }) {
     return (
         <div className="bg-[#050505] min-h-screen">
             <AnimatePresence mode="wait">
-                {!introComplete && <Preloader key="preloader" onComplete={handleComplete} />}
+                {!introComplete && <Preloader key="preloader" onComplete={handleComplete} loading={loading} />}
             </AnimatePresence>
             
             <Navbar />
             
-            <main className={`transition-opacity duration-1000 ${introComplete && !loading ? 'opacity-100' : 'opacity-0'}`}>
+            <main className={`transition-opacity duration-1000 ${!loading || (introComplete && data) ? 'opacity-100' : 'opacity-0'}`}>
                 {data?.sections && <SectionRenderer sections={data.sections} />}
             </main>
 

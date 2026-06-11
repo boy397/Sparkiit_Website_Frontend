@@ -6,11 +6,13 @@ import { motion, useSpring, useMotionValue } from "framer-motion";
 type CursorState = "default" | "text" | "clickable";
 
 export default function CustomCursor() {
+    const [mounted, setMounted] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [cursorState, setCursorState] = useState<CursorState>("default");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         const observer = new MutationObserver(() => {
             const open = document.documentElement.classList.contains('modal-open');
             setIsModalOpen(open);
@@ -167,7 +169,7 @@ export default function CustomCursor() {
         }
     };
 
-    if (!isVisible || isModalOpen) return null;
+    if (!mounted || !isVisible || isModalOpen) return null;
 
     return (
         <>
